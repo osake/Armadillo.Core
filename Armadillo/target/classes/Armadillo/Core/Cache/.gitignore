@@ -1,0 +1,17 @@
+/ASqliteCache.class
+/EnumDbType.class
+/GenericDbJdbcWrapper.class
+/ISqliteCache.class
+/ISqliteCacheBase.class
+/SqliteBulkInsert.class
+/SqliteCacheConnectionPool$1.class
+/SqliteCacheConnectionPool.class
+/SqliteCacheFullSchema.class
+/SqliteConstants.class
+/SqliteJdbcWrapper.class
+/SqliteReadJob.class
+/SqliteTaskQueues$1.class
+/SqliteTaskQueues$2.class
+/SqliteTaskQueues$3.class
+/SqliteTaskQueues.class
+/SqliteWriteJob.class
