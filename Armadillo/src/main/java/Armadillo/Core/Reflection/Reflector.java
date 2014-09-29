@@ -282,7 +282,7 @@ public class Reflector {
 			
 			field.set(obj, value);
 		} 
-		catch (IllegalArgumentException | IllegalAccessException ex) 
+		catch (Exception ex) 
 		{
 			Logger.log(ex);
 		}

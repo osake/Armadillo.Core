@@ -287,17 +287,17 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
             else if (propertyType == Boolean.class ||
             		propertyType == boolean.class)
             {
-            	int intVal = (int) obj;
+            	int intVal = (Integer) obj;
                 obj = intVal == 1;
             }
             else if (propertyType == Date.class)
             {
-            	double dblDateVal = (double) obj;
+            	double dblDateVal = (Double) obj;
                 obj = new DateTime((long)dblDateVal).toDate();
             }
             else if (propertyType == DateTime.class)
             {
-            	double dblDateVal = (double) obj;
+            	double dblDateVal = (Double) obj;
                 obj = new DateTime((long)dblDateVal);
             }
             else if (propertyType == double.class &&

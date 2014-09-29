@@ -355,12 +355,12 @@ public class ASelfDescribingClass {
                 if (propertyType == Integer.class)
                 {
                     otherSelfDescribingClass.SetIntValue(strPropertyName,
-                                                               (int)objValue);
+                                                               (Integer)objValue);
                 }
                 else if (propertyType == Double.class)
                 {
                     otherSelfDescribingClass.SetDblValue(strPropertyName,
-                                                               (double)objValue);
+                                                               (Double)objValue);
                 }
                 else if (propertyType == String.class)
                 {
@@ -375,12 +375,12 @@ public class ASelfDescribingClass {
                 else if (propertyType == Boolean.class)
                 {
                     otherSelfDescribingClass.SetBlnValue(strPropertyName,
-                                                               (boolean)objValue);
+                                                               (Boolean)objValue);
                 }
                 else if (propertyType == Long.class)
                 {
                     otherSelfDescribingClass.SetLngValue(strPropertyName,
-                                                               (long)objValue);
+                                                               (Long)objValue);
                 }
                 else
                 {
@@ -506,7 +506,7 @@ public class ASelfDescribingClass {
     private int GetHardIntValue(String strPropertyName)
     {
         Object objValue = GetHardPropertyValue(strPropertyName);
-        int intValue = (int)(objValue);
+        int intValue = (Integer)(objValue);
         return intValue;
     }
 
@@ -569,7 +569,7 @@ public class ASelfDescribingClass {
         {
             return Double.NaN;
         }
-        double dblValue = (double)objValue;
+        double dblValue = (Double)objValue;
         return dblValue;
     }
 
@@ -608,7 +608,7 @@ public class ASelfDescribingClass {
     private long GetHardLngValue(String strPropertyName)
     {
         Object objValue = GetHardPropertyValue(strPropertyName);
-        long lngValue = (long)objValue;
+        long lngValue = (Long)objValue;
         return lngValue;
     }
 
@@ -1751,15 +1751,15 @@ public class ASelfDescribingClass {
         Type propertyType = objProperty.getClass();
         if (propertyType == Integer.class)
         {
-            SetIntValue(strPropertyName, (int)objProperty);
+            SetIntValue(strPropertyName, (Integer)objProperty);
         }
         else if (propertyType == Double.class)
         {
-            SetDblValue(strPropertyName, (double)objProperty);
+            SetDblValue(strPropertyName, (Double)objProperty);
         }
         else if (propertyType == Long.class)
         {
-            SetLngValue(strPropertyName, (long)objProperty);
+            SetLngValue(strPropertyName, (Long)objProperty);
         }
         else if (propertyType == Boolean.class)
         {

@@ -97,6 +97,7 @@ public class SqliteCacheConnectionPool {
 		return cacheWrapper;
 	}	
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static <T> ISqliteCacheBase createDbWrapperInstance(
 			String m_strFileName,
 			Reflector m_reflector,
@@ -123,7 +124,7 @@ public class SqliteCacheConnectionPool {
 					Thread.sleep(2000);
 					synchronized(m_dbLock )
 					{
-						dbWrapper = new SqliteJdbcWrapper<>
+						dbWrapper = new SqliteJdbcWrapper
 						(
 								m_strFileName,
 								m_reflector,

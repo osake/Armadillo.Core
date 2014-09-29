@@ -1,0 +1,31 @@
+package Armadillo.Communication.Impl.Distributed;
+
+public enum EnumDistributed {
+    JobId,
+    ControllerId,
+    Result,
+    WorkerId,
+    Disconnected,
+    Connected,
+    DoWorkAnswer,
+    JobParams,
+    TopicWorkerToControllerResult,
+    Time,
+    TopicControllerToWorkerResultConfirm,
+    JobDoneAck,
+    HeartBeatWorkerClass,
+    TopicControllerToWorkerHeartBeat,
+    TopicWorkerToControllerHeartBeat,
+    RequestorName,
+    InProgress,
+    Done,
+    JobsDoneTopic,
+    TimeControllerToWorker,
+    PullParams,
+    PullId,
+    TopicWorkerToControllerPullJob,
+    TopicControllerToWorkerPullJob,
+    TopicWorkerToControllerPullJobAck,
+    AlreadyDone, 
+    WorkerJobsToDoTopic
+}
