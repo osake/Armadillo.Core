@@ -59,7 +59,7 @@ public class Foo extends AFoo implements Closeable
 	}
 	
 	public static ArrayList<Foo> getFooList(Integer intSize,
-			boolean blnDoWork){
+			Boolean blnDoWork){
 		ArrayList<Foo> fooList = new ArrayList<Foo>();
 		
 		try{

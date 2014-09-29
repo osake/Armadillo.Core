@@ -3,6 +3,8 @@ package Armadillo.Core.Concurrent;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 
@@ -150,7 +152,7 @@ public class Task implements Closeable {
 		return m_item;
 	}
 
-	public static void waitAll(ArrayList<Task> taskList) 
+	public static void waitAll(List<Task> taskList) 
 	{
 		try
 		{

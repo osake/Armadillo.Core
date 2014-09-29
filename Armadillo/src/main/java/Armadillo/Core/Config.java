@@ -1,7 +1,9 @@
 package Armadillo.Core;
 
 
+import java.io.File;
 import java.util.HashMap;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
@@ -22,28 +24,40 @@ public class Config
 	
 	static
 	{
-        //String strDnsName = NetworkHelper.getHostName();
-        
         m_strClientName = strDnsName + "%" +
         		RuntimeHelper.getCurrentJarName() + "%" +
         		RuntimeHelper.getProcessId();
 	}
 	
-	public static String getClientName(){
-		try{
+	public static String getClientName()
+	{
+		try
+		{
 			return m_strClientName;
 		}
-		catch(Exception ex){
+		catch(Exception ex)
+		{
 			Logger.log(ex);
 		}
 		return "";
 	}
+
+	public static String getStringStatic(String strKey) 
+	{
+		Class<?> callingClass = Config.class;
+		return getStringStatic(strKey, callingClass);
+	}
 	
-	public static String getStringStatic(String strKey) {
-		try {
-			Class<?> callingClass = Config.class;
+	public static String getStringStatic(
+			String strKey,
+			Class<?> callingClass) 
+	{
+		try 
+		{
 			return getConfig(callingClass).getStr(strKey);
-		} catch (Exception ex) {
+		} 
+		catch (Exception ex) 
+		{
 			ex.printStackTrace();
 		}
 		return "";
@@ -53,6 +67,7 @@ public class Config
 	{
 		return m_config.getString(strKey);
 	}
+
 
 	public static Config getConfig(Class<?> callingClass) 
 	{
@@ -77,13 +92,17 @@ public class Config
 			{
 				return;
 			}
+			
 			String strPackageName = classRef.getPackage().getName();
-			m_strConfigName = PathHelper.combinePaths(LOCATION, strPackageName)
+			m_strConfigName = PathHelper.combinePaths(
+					LOCATION, 
+					strPackageName)
 					+ ".xml";
 
 			if (!FileHelper.exists(m_strConfigName)) 
 			{
-				throw new Exception("Config file not found [" + m_strConfigName
+				throw new Exception("Config file not found [" + 
+						new File(m_strConfigName).getAbsolutePath()
 						+ "]");
 			}
 			getConfig();
