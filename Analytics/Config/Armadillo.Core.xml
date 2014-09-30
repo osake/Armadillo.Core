@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Constants>
+<LogFile>TestLogFile</LogFile>
+<LogPath>c:\HC.Java\Logs</LogPath>
+<DataPath>c:\HC.Java\Data</DataPath>
+</Constants>
