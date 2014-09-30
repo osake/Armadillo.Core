@@ -1,6 +1,13 @@
 package Armadillo.Core;
 
-public class HCException extends IllegalArgumentException {
+public class HCException extends IllegalArgumentException 
+
+{
+    public static void doAssert(boolean cond, String s)
+    {
+        if( !cond )
+            throw new HCException(s);
+    }
 
 	/**
 	 * 
