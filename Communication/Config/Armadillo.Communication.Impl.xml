@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Constants>
+<TopicServerName>localhost</TopicServerName>
+<ReqRespPort>30</ReqRespPort>
+<CalcTopic>CalcTopic</CalcTopic>
+<CalcThreads>1</CalcThreads>
+<ResultSize>100</ResultSize>
+</Constants>
