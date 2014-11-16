@@ -9,6 +9,7 @@ public interface IHeuristicObjectiveFunction extends IObjectiveFunction
 
     /// <summary>
     ///   Get real return. Ignore return weights to 
+    ///  Remember that the optimiser maximises!
     ///   calculate the return
     /// </summary>
     /// <param name = "individual">

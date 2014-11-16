@@ -366,7 +366,7 @@ public class RngWrapper implements IRng
         ArrayList<T> listQ = new ArrayList<T>(intNumbersCount + 1);
         for (int i = 0; i < intNumbersCount; i++)
         {
-            int rn = m_rng.nextInt(listNumbers.size());
+            int rn = m_rng.NextInt(0, listNumbers.size()-1);
             T q = listNumbers.get(rn);
             listNumbers.remove(rn);
             listQ.add(q);

@@ -23,6 +23,9 @@ import Armadillo.Communication.zmq.org.zeromq.ZMQ.Socket;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * The ZMsg class provides methods to send and receive multipart messages
@@ -644,4 +647,34 @@ public class ZMsg implements Iterable<ZFrame>, Deque<ZFrame> {
     public int size() {
         return frames.size();
     }
+
+	@Override
+	public boolean removeIf(Predicate<? super ZFrame> filter) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Stream<ZFrame> stream() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Stream<ZFrame> parallelStream() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void forEach(Consumer<? super ZFrame> action) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Spliterator<ZFrame> spliterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -10,6 +10,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import org.joda.time.DateTime;
 
@@ -433,6 +437,55 @@ public class VariableSelector
 						    {
 						        return a.getValue().compareTo(b.getValue());
 						    }
+
+							@Override
+							public Comparator<Entry<Integer, Double>> reversed() {
+								// TODO Auto-generated method stub
+								return null;
+							}
+
+							@Override
+							public Comparator<Entry<Integer, Double>> thenComparing(
+									Comparator<? super Entry<Integer, Double>> other) {
+								// TODO Auto-generated method stub
+								return null;
+							}
+
+							@Override
+							public <U> Comparator<Entry<Integer, Double>> thenComparing(
+									Function<? super Entry<Integer, Double>, ? extends U> keyExtractor,
+									Comparator<? super U> keyComparator) {
+								// TODO Auto-generated method stub
+								return null;
+							}
+
+							@Override
+							public <U extends Comparable<? super U>> Comparator<Entry<Integer, Double>> thenComparing(
+									Function<? super Entry<Integer, Double>, ? extends U> keyExtractor) {
+								// TODO Auto-generated method stub
+								return null;
+							}
+
+							@Override
+							public Comparator<Entry<Integer, Double>> thenComparingInt(
+									ToIntFunction<? super Entry<Integer, Double>> keyExtractor) {
+								// TODO Auto-generated method stub
+								return null;
+							}
+
+							@Override
+							public Comparator<Entry<Integer, Double>> thenComparingLong(
+									ToLongFunction<? super Entry<Integer, Double>> keyExtractor) {
+								// TODO Auto-generated method stub
+								return null;
+							}
+
+							@Override
+							public Comparator<Entry<Integer, Double>> thenComparingDouble(
+									ToDoubleFunction<? super Entry<Integer, Double>> keyExtractor) {
+								// TODO Auto-generated method stub
+								return null;
+							}
 						});	
                 
                 //rankingsList.Sort((a,b) => -a.Value.CompareTo(b.Value));

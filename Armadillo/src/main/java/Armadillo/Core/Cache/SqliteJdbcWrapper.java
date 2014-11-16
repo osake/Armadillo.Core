@@ -108,7 +108,8 @@ public class SqliteJdbcWrapper<T> implements ISqliteCacheBase
     		Reflector reflector,
     		String strFileName,
     		boolean blnUseCompression,
-    		EnumDbType enumDbType)
+    		EnumDbType enumDbType,
+    		String strDriver)
     {
     	try
     	{
@@ -139,7 +140,8 @@ public class SqliteJdbcWrapper<T> implements ISqliteCacheBase
 	    			false,
 	    			strFileName,
 	    			reflector,
-	    			enumDbType);
+	    			enumDbType,
+	    			strDriver);
     	}
     	catch(Exception ex)
     	{
@@ -278,11 +280,13 @@ public class SqliteJdbcWrapper<T> implements ISqliteCacheBase
 			ArrayList<Object[]> data,
 			Reflector reflector,
 			String strFileName,
-			EnumDbType enumDbType){
+			EnumDbType enumDbType,
+			String strDriver)
+	{
 		
 		SqliteReadJob readJob = null;
-		try {
-			
+		try 
+		{
 			ProducerConsumerQueue<SqliteReadJob> queue = SqliteTaskQueues.getReadQueue(
 					strFileName,
 					enumDbType);
@@ -292,7 +296,8 @@ public class SqliteJdbcWrapper<T> implements ISqliteCacheBase
 					reflector.getColNames().length, 
 					strFileName,
 					reflector,
-					enumDbType);
+					enumDbType,
+					strDriver);
 			
 			ArrayList<Object[]> dataRes = new ArrayList<Object[]>();
 			readJob.setData(dataRes);

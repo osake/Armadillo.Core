@@ -88,7 +88,8 @@ public class SqliteTaskQueues
 			String strSql,
 			String strFileName,
 			Reflector reflector,
-			EnumDbType enumDbType) 
+			EnumDbType enumDbType,
+			String strDriver) 
     {
     	SqliteWriteJob newWriteJob = null;
     	try
@@ -108,7 +109,8 @@ public class SqliteTaskQueues
 	    				strFileName,
 	    				strTableName,
 	    				reflector,
-	    				enumDbType);
+	    				enumDbType,
+	    				strDriver);
 	    		newWriteJob.setIsOnlyWrite(true);
 	    		newWriteJob.setSql(strSql);
 	    		Task newTask = queue.add(strKey, newWriteJob);
@@ -130,7 +132,8 @@ public class SqliteTaskQueues
 			boolean b,
 			String strFileName,
 			Reflector reflector,
-			EnumDbType enumDbType) 
+			EnumDbType enumDbType,
+			String strDriver) 
     {
     	SqliteWriteJob newWriteJob = null;
     	try
@@ -237,7 +240,8 @@ public class SqliteTaskQueues
 	    				strFileName,
 	    				strTableName,
 	    				reflector,
-	    				enumDbType);
+	    				enumDbType,
+	    				strDriver);
 	    		if(queue.containsKey(strQueueKey))
 	    		{
 	    			throw new HCException("Item already in queue!");
@@ -261,7 +265,8 @@ public class SqliteTaskQueues
 			Reflector reflector,
 			String strFileName,
 			boolean blnIncludeKeyCol,
-			EnumDbType enumDbType)
+			EnumDbType enumDbType,
+			String strDriver)
 	{
 		
 		enqueueLoadData(
@@ -271,7 +276,8 @@ public class SqliteTaskQueues
 				strFileName,
 				blnIncludeKeyCol,
 				enumDbType,
-				null);
+				null,
+				strDriver);
 	}
     
 	public static void enqueueLoadData(
@@ -281,7 +287,9 @@ public class SqliteTaskQueues
 			String strFileName,
 			boolean blnIncludeKeyCol,
 			EnumDbType enumDbType,
-			ArrayList<String> schema){
+			ArrayList<String> schema,
+			String strDriver)
+	{
 		
 		SqliteReadJob readJob = null;
 		try 
@@ -292,7 +300,8 @@ public class SqliteTaskQueues
 					reflector.getColNames().length, 
 					strFileName,
 					reflector,
-					enumDbType);
+					enumDbType,
+					strDriver);
 			readJob.setIncludeKeyId(blnIncludeKeyCol);
 			
 			if(schema != null)
@@ -357,7 +366,9 @@ public class SqliteTaskQueues
 			String strSql,
 			Reflector reflector,
 			String strFileName,
-			EnumDbType enumDbType){
+			EnumDbType enumDbType,
+			String strDriver)
+	{
 		
 		SqliteReadJob readJob = null;
 		try 
@@ -371,7 +382,8 @@ public class SqliteTaskQueues
 					reflector.getColNames().length, 
 					strFileName,
 					reflector,
-					enumDbType);
+					enumDbType,
+					strDriver);
 			readJob.setIsOnlyRead(true);
 			return queue.add(readJob);
 			
@@ -460,6 +472,7 @@ public class SqliteTaskQueues
 			String strFileName = sqliteWriteJob.getFileName();
 			Reflector reflector = sqliteWriteJob.getReflector();
 			EnumDbType enumDbType = sqliteWriteJob.getEnumDbType();
+			String strDriver = sqliteWriteJob.getDriver();
 			
 			boolean blnIsValid = false;
 			
@@ -468,6 +481,7 @@ public class SqliteTaskQueues
 				ISqliteCacheBase cache = SqliteCacheConnectionPool.getDbWrapper(
 						strFileName, 
 						reflector,
+						strDriver,
 						enumDbType);
 				writeLock = cache.getReadWriteLock().writeLock();
 				
@@ -560,6 +574,7 @@ public class SqliteTaskQueues
 			String strFileName = sqliteReadJob.getFileName();
 			Reflector reflector = sqliteReadJob.getReflector();
 			EnumDbType enumDbType = sqliteReadJob.getEnumDbType();
+			String strDriver = sqliteReadJob.getDriver();
 			boolean blnIsValid = false;
 			
 			while(!blnIsValid)
@@ -567,6 +582,7 @@ public class SqliteTaskQueues
 				ISqliteCacheBase cache = SqliteCacheConnectionPool.getDbWrapper(
 						strFileName, 
 						reflector,
+						strDriver,
 						enumDbType);
 				readLock = cache.getReadWriteLock().readLock();
 				
@@ -658,7 +674,7 @@ public class SqliteTaskQueues
 			Reflector reflector = sqliteReadJob.getReflector();
 			EnumDbType enumDbType = sqliteReadJob.getEnumDbType();
 			boolean blnIsOnlyRead = sqliteReadJob.getIsOnlyRead();
-			
+			String strDriver = sqliteReadJob.getDriver();			
 			boolean blnIsValid = false;
 			
 			while(!blnIsValid)
@@ -667,6 +683,7 @@ public class SqliteTaskQueues
 				ISqliteCacheBase cache = SqliteCacheConnectionPool.getDbWrapper(
 						strFileName, 
 						reflector,
+						strDriver,
 						enumDbType);
 				readLock = cache.getReadWriteLock().readLock();
 				
@@ -793,6 +810,7 @@ public class SqliteTaskQueues
 			String strFileName = sqliteWriteJob.getFileName();
 			Reflector reflector = sqliteWriteJob.getReflector();
 			EnumDbType enumDbType = sqliteWriteJob.getEnumDbType();
+			String strDriver = sqliteWriteJob.getDriver();			
 			
 			boolean blnIsValid = false;
 			
@@ -801,6 +819,7 @@ public class SqliteTaskQueues
 				ISqliteCacheBase cache = SqliteCacheConnectionPool.getDbWrapper(
 						strFileName, 
 						reflector,
+						strDriver,
 						enumDbType);
 				writeLock = cache.getReadWriteLock().writeLock();
 				
@@ -879,6 +898,8 @@ public class SqliteTaskQueues
 			String strFileName = sqliteReadJob.getFileName();
 			Reflector reflector = sqliteReadJob.getReflector();
 			EnumDbType enumDbType = sqliteReadJob.getEnumDbType();
+			String strDriver = sqliteReadJob.getDriver();
+			
 			boolean blnIsValid = false;
 			
 			while(!blnIsValid){
@@ -886,6 +907,7 @@ public class SqliteTaskQueues
 				ISqliteCacheBase cache = SqliteCacheConnectionPool.getDbWrapper(
 						strFileName, 
 						reflector,
+						strDriver,
 						enumDbType);
 				readLock = cache.getReadWriteLock().readLock();
 				

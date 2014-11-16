@@ -18,9 +18,10 @@ public class GenericDbJdbcWrapper<T> extends SqliteJdbcWrapper<T>{
 	}
 		
 	@Override
-	protected void openDb() {
-
-		try {
+	protected void openDb() 
+	{
+		try 
+		{
 			Class.forName(m_strDriver).newInstance();
 			String strUrl = m_strFileName;
 			String strMessage ="Loading connection ["+ strUrl + "]..."; 
@@ -32,7 +33,9 @@ public class GenericDbJdbcWrapper<T> extends SqliteJdbcWrapper<T>{
 			
 			strMessage ="Loaded connection ["+ strUrl + "]"; 
 			Logger.log(strMessage);
-		} catch (Exception ex) {
+		} 
+		catch (Exception ex) 
+		{
 			Logger.log(ex);
 		}
 	}

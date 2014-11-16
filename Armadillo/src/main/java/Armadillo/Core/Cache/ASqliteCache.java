@@ -26,16 +26,19 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 	private boolean m_blnIsClosed;
 	private boolean m_blnUseCompression;
 	protected EnumDbType m_enumDbType;
+	protected String m_strDriver;
 	
 	public ASqliteCache(
 			String strFileName,
 			String strTableName,
 			String strDefaultIndex,
 			Class<T> item,
-			EnumDbType enumDbType){
-		
-		try{
-			
+			EnumDbType enumDbType,
+			String strDriver)
+	{
+		try
+		{
+			m_strDriver = strDriver;
 			m_genericClass = item;
 			m_enumDbType = enumDbType;
     		m_reflector = ReflectionCache.getReflector(m_genericClass);
@@ -47,7 +50,14 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
     			m_allCols[i+1] =cols[i];
 			}
     		 
-			m_strFileName = FileHelper.cleanFileName(strFileName);
+    		if(enumDbType == EnumDbType.SqLite)
+    		{
+    			m_strFileName = FileHelper.cleanFileName(strFileName);
+    		}
+    		else
+    		{
+    			m_strFileName = strFileName;
+    		}
 			m_strDefaultIndex = strDefaultIndex;
 			m_strTableName = strTableName.toUpperCase();
 			String strTableKey = strFileName + "_" + strTableName;
@@ -63,24 +73,19 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 		}
 	}
 	
-	private void createDefaultIndex() {
-		
-		if(m_strDefaultIndex ==  null){
+	private void createDefaultIndex() 
+	{
+		if(m_strDefaultIndex ==  null)
+		{
 			return;
 		}
 		
-        String strSql = getCreateIndexStatement();
-        
-        try {
-        	
-			SqliteTaskQueues.enqueueWrite(
-					m_strTableName, 
-					strSql,
-					m_strFileName,
-					m_reflector,
-					m_enumDbType).waitTask();
-			
-		} catch (Exception ex) {
+        try 
+        {
+        	// no write access
+		} 
+        catch (Exception ex) 
+        {
 			Logger.log(ex);
 		}            
 	}
@@ -248,7 +253,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 					strSql,
 					m_strFileName,
 					m_reflector,
-					m_enumDbType).waitTask();
+					m_enumDbType,
+					m_strDriver).waitTask();
 			
 		} catch (Exception ex) {
 			Logger.log(ex);
@@ -268,7 +274,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 					strSql,
 					m_strFileName,
 					m_reflector,
-					m_enumDbType).waitTask();
+					m_enumDbType,
+					m_strDriver).waitTask();
 			
 		} catch (Exception ex) {
 			Logger.log(ex);
@@ -286,7 +293,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 					strSql,
 					m_strFileName,
 					m_reflector,
-					m_enumDbType).waitTask();
+					m_enumDbType,
+					m_strDriver).waitTask();
 			
 		} catch (Exception ex) {
 			Logger.log(ex);
@@ -304,7 +312,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
  					strSql,
  					m_strFileName,
  					m_reflector,
- 					m_enumDbType).waitTask();
+ 					m_enumDbType,
+ 					m_strDriver).waitTask();
  			
  		} catch (Exception ex) {
  			Logger.log(ex);
@@ -322,7 +331,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 					strSql,
 					m_strFileName,
 					m_reflector,
-					m_enumDbType).waitTask();
+					m_enumDbType,
+					m_strDriver).waitTask();
 			
 		} catch (Exception ex) {
 			Logger.log(ex);
@@ -364,7 +374,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
     					strSql,
     					m_strFileName,
     					m_reflector,
-    					m_enumDbType).waitTask();
+    					m_enumDbType,
+    					m_strDriver).waitTask();
     			
     		} catch (Exception ex) {
     			Logger.log(ex);
@@ -383,7 +394,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 					0, 
 					m_strFileName, 
 					m_reflector,
-					m_enumDbType);
+					m_enumDbType,
+					m_strDriver);
 			int intVal = SqliteTaskQueues.executeScalar(
 					sqliteReadJob);
 			
@@ -414,7 +426,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 					strSql,
 					m_strFileName,
 					m_reflector,
-					m_enumDbType).waitTask();
+					m_enumDbType,
+					m_strDriver).waitTask();
     			
     	} 
       	catch (Exception ex) 
@@ -436,7 +449,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
     					strSql,
     					m_strFileName,
     					m_reflector,
-    					m_enumDbType).waitTask();
+    					m_enumDbType,
+    					m_strDriver).waitTask();
     			
     		} catch (Exception ex) {
     			Logger.log(ex);
@@ -493,7 +507,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 	        		m_reflector,
 	        		m_strFileName,
 	        		m_blnUseCompression,
-	        		m_enumDbType);
+	        		m_enumDbType,
+	        		m_strDriver);
 			objs.clear();
 			
 			return task;    	
@@ -530,7 +545,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 	        		m_reflector,
 	        		m_strFileName,
 	        		m_blnUseCompression,
-	        		m_enumDbType);
+	        		m_enumDbType,
+	        		m_strDriver);
 			//objs.clear();
 			
 			return task;    	
@@ -576,7 +592,8 @@ public abstract class ASqliteCache<T> implements ISqliteCache {
 	                        		m_reflector,
 	                        		m_strFileName,
 	                        		m_blnUseCompression,
-	                        		m_enumDbType);
+	                        		m_enumDbType,
+	                        		m_strDriver);
 	        objs.clear();
 	        objs = null;
 	        return task;    	

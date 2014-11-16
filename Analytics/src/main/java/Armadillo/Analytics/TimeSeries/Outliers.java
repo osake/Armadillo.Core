@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import org.joda.time.DateTime;
 
@@ -374,6 +378,55 @@ public class Outliers
 					return item1.Time.compareTo(item2.Time);
 					
 				}
+
+				@Override
+				public Comparator<TsRow2D> reversed() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<TsRow2D> thenComparing(
+						Comparator<? super TsRow2D> other) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U> Comparator<TsRow2D> thenComparing(
+						Function<? super TsRow2D, ? extends U> keyExtractor,
+						Comparator<? super U> keyComparator) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U extends Comparable<? super U>> Comparator<TsRow2D> thenComparing(
+						Function<? super TsRow2D, ? extends U> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<TsRow2D> thenComparingInt(
+						ToIntFunction<? super TsRow2D> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<TsRow2D> thenComparingLong(
+						ToLongFunction<? super TsRow2D> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<TsRow2D> thenComparingDouble(
+						ToDoubleFunction<? super TsRow2D> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
 				});
 
             //outLiers.Sort((a, b) => a.Time.CompareTo(b.Time));
@@ -455,6 +508,55 @@ public class Outliers
 				{
 					return item1.Time.compareTo(item2.Time);
 					
+				}
+
+				@Override
+				public Comparator<TsRow2D> reversed() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<TsRow2D> thenComparing(
+						Comparator<? super TsRow2D> other) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U> Comparator<TsRow2D> thenComparing(
+						Function<? super TsRow2D, ? extends U> keyExtractor,
+						Comparator<? super U> keyComparator) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U extends Comparable<? super U>> Comparator<TsRow2D> thenComparing(
+						Function<? super TsRow2D, ? extends U> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<TsRow2D> thenComparingInt(
+						ToIntFunction<? super TsRow2D> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<TsRow2D> thenComparingLong(
+						ToLongFunction<? super TsRow2D> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<TsRow2D> thenComparingDouble(
+						ToDoubleFunction<? super TsRow2D> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
 				}
 				});
             

@@ -1,6 +1,7 @@
 package Armadillo.Core.Cache;
 
 import java.io.Closeable;
+
 import Armadillo.Core.Concurrent.EfficientProducerConsumerQueue;
 import Armadillo.Core.Concurrent.Task;
 import Armadillo.Core.Reflection.Reflector;
@@ -20,6 +21,7 @@ public class SqliteWriteJob implements Closeable {
 	private boolean m_blnIsOnlyWrite;
 	private boolean m_blnIsClosed;
 	private EnumDbType m_enumDbType;
+	private String m_strDriver;
 
 	public SqliteWriteJob(
 			String[] columns, 
@@ -28,7 +30,9 @@ public class SqliteWriteJob implements Closeable {
 			String strFileName, 
 			String strTableName,
 			Reflector reflector,
-			EnumDbType enumDbType) {
+			EnumDbType enumDbType,
+			String strDriver) 
+	{
 
 		m_lockObj = new Object();
 		m_columns = columns;
@@ -38,6 +42,7 @@ public class SqliteWriteJob implements Closeable {
 		m_strTableName = strTableName;
 		m_reflector = reflector;
 		m_enumDbType = enumDbType;
+		m_strDriver = strDriver;
 	}
 
 	public String[] getColumns() {
@@ -133,5 +138,9 @@ public class SqliteWriteJob implements Closeable {
 	public EnumDbType getEnumDbType() {
 		// TODO Auto-generated method stub
 		return m_enumDbType;
+	}
+
+	public String getDriver() {
+		return m_strDriver;
 	}
 }

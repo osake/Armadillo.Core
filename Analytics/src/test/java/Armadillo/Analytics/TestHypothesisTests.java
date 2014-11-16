@@ -135,7 +135,7 @@ public class TestHypothesisTests
 	    	RngWrapper rng = new RngWrapper();
 	    	List<Double> randoms = new ArrayList<Double>();
 	    	List<Double> normal = new ArrayList<Double>();
-	        for (int i = 0; i < 50000; i++)
+	        for (int i = 0; i < 500000; i++)
 	        {
 	            double dblRandom = rng.nextDouble();
 	            randoms.add(dblRandom);

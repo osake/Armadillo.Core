@@ -23,6 +23,7 @@ public class SqliteReadJob implements Closeable
 	private boolean m_blnIsDisposed;
 	private boolean m_blnLoadColNames;
 	private String[] m_colNames;
+	private String m_strDriver;
 	
 	public SqliteReadJob(
 			ProducerConsumerQueue<SqliteReadJob> readerQueue,
@@ -30,7 +31,8 @@ public class SqliteReadJob implements Closeable
 			 int intColCount,
 			 String strFileName,
 			 Reflector reflector,
-			 EnumDbType enumDbType) 
+			 EnumDbType enumDbType,
+			 String strDriver) 
 	{
 		if(StringHelper.IsNullOrEmpty(strFileName))
 		{
@@ -50,6 +52,7 @@ public class SqliteReadJob implements Closeable
 		m_strFileName = strFileName;
 		m_reflector = reflector;
 		m_enumDbType = enumDbType;
+		m_strDriver = strDriver;
 	}
 	
 	public ProducerConsumerQueue<SqliteReadJob> getReaderQueue() 
@@ -138,5 +141,9 @@ public class SqliteReadJob implements Closeable
 
 	public void setColNames(String[] colNames) {
 		m_colNames = colNames;
+	}
+
+	public String getDriver() {
+		return m_strDriver;
 	}
 }

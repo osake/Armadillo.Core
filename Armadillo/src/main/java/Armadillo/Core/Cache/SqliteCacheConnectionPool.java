@@ -53,6 +53,7 @@ public class SqliteCacheConnectionPool {
 	public static ISqliteCacheBase getDbWrapper(
 			String strFileName,
 			Reflector reflector,
+			String strDriver,
 			EnumDbType enumDbType){
 		
 		ISqliteCacheBase cacheWrapper = null;
@@ -73,6 +74,7 @@ public class SqliteCacheConnectionPool {
 						cacheWrapper = createDbWrapperInstance(
 								strFileName,
 								reflector,
+								strDriver,
 								enumDbType);
 						
 						synchronized(m_lockBufferCahes )
@@ -101,6 +103,7 @@ public class SqliteCacheConnectionPool {
 	private static <T> ISqliteCacheBase createDbWrapperInstance(
 			String m_strFileName,
 			Reflector m_reflector,
+			String strDriver,
 			EnumDbType enumDbType) {
 		
 		try
@@ -137,15 +140,16 @@ public class SqliteCacheConnectionPool {
 					
 				}
 			}
-			else if(enumDbType == EnumDbType.Oracle){
+			else if(enumDbType == EnumDbType.OTHER){
 				
 				dbWrapper = new GenericDbJdbcWrapper<T>(
 						m_strFileName,
 						m_reflector,
-						"oracle.jdbc.OracleDriver",
+						strDriver, //"oracle.jdbc.OracleDriver",
 						enumDbType);
 			}
-			else{
+			else
+			{
 				throw new HCException("Not implemented");
 			}
 			

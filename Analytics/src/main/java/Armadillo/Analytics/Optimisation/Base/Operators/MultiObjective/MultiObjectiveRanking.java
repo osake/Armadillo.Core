@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import Armadillo.Analytics.Optimisation.Base.ObjectiveFunctions.AEqualityConstrainObjFunc;
 import Armadillo.Analytics.Optimisation.Base.ObjectiveFunctions.ARangeConstrainedObjFunc;
@@ -172,6 +176,55 @@ public class MultiObjectiveRanking
 						{
 							return DoubleHelper.compare(arg0.Rank, arg1.Rank);
 						}
+
+						@Override
+						public Comparator<RankObj> reversed() {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<RankObj> thenComparing(
+								Comparator<? super RankObj> other) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public <U> Comparator<RankObj> thenComparing(
+								Function<? super RankObj, ? extends U> keyExtractor,
+								Comparator<? super U> keyComparator) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public <U extends Comparable<? super U>> Comparator<RankObj> thenComparing(
+								Function<? super RankObj, ? extends U> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<RankObj> thenComparingInt(
+								ToIntFunction<? super RankObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<RankObj> thenComparingLong(
+								ToLongFunction<? super RankObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<RankObj> thenComparingDouble(
+								ToDoubleFunction<? super RankObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
         			});
             int i = 0;
             for (; i < validRanked.size(); i++)
@@ -198,6 +251,55 @@ public class MultiObjectiveRanking
 						public int compare(RankObj arg0, RankObj arg1) 
 						{
 							return DoubleHelper.compare(arg0.Rank, arg1.Rank);
+						}
+
+						@Override
+						public Comparator<RankObj> reversed() {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<RankObj> thenComparing(
+								Comparator<? super RankObj> other) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public <U> Comparator<RankObj> thenComparing(
+								Function<? super RankObj, ? extends U> keyExtractor,
+								Comparator<? super U> keyComparator) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public <U extends Comparable<? super U>> Comparator<RankObj> thenComparing(
+								Function<? super RankObj, ? extends U> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<RankObj> thenComparingInt(
+								ToIntFunction<? super RankObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<RankObj> thenComparingLong(
+								ToLongFunction<? super RankObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<RankObj> thenComparingDouble(
+								ToDoubleFunction<? super RankObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
 						}
         			});
         	
@@ -408,6 +510,55 @@ public class MultiObjectiveRanking
 					public int compare(RankObj arg0, RankObj arg1) 
 					{
 						return DoubleHelper.compare(arg0.Rank, arg1.Rank);
+					}
+
+					@Override
+					public Comparator<RankObj> reversed() {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public Comparator<RankObj> thenComparing(
+							Comparator<? super RankObj> other) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public <U> Comparator<RankObj> thenComparing(
+							Function<? super RankObj, ? extends U> keyExtractor,
+							Comparator<? super U> keyComparator) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public <U extends Comparable<? super U>> Comparator<RankObj> thenComparing(
+							Function<? super RankObj, ? extends U> keyExtractor) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public Comparator<RankObj> thenComparingInt(
+							ToIntFunction<? super RankObj> keyExtractor) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public Comparator<RankObj> thenComparingLong(
+							ToLongFunction<? super RankObj> keyExtractor) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					@Override
+					public Comparator<RankObj> thenComparingDouble(
+							ToDoubleFunction<? super RankObj> keyExtractor) {
+						// TODO Auto-generated method stub
+						return null;
 					}
 				};
 	        	Collections.sort(ranked, rankComparator);

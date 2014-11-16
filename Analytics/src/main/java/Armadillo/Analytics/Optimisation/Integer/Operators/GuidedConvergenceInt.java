@@ -14,6 +14,7 @@ import Armadillo.Analytics.Optimisation.Base.Operators.IndividualClasses.Individ
 import Armadillo.Analytics.Optimisation.Base.Problem.HeuristicProblem;
 import Armadillo.Analytics.Stat.Random.RngWrapper;
 import Armadillo.Core.HCException;
+import Armadillo.Core.Logger;
 
 public class GuidedConvergenceInt extends AGuidedConvergence
 {
@@ -139,8 +140,7 @@ public class GuidedConvergenceInt extends AGuidedConvergence
         }
         catch (Exception e2)
         {
-            //Debugger.Break();
-            throw e2;
+        	Logger.log(e2);
         }
     }
 

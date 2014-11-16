@@ -8,6 +8,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import Armadillo.Core.Console;
 import Armadillo.Core.Text.TokenWrapper;
@@ -94,6 +98,55 @@ public class StopWords
 			        }
 			        
 			        return 0;
+				}
+
+				@Override
+				public Comparator<Entry<TokenWrapper, Double>> reversed() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Entry<TokenWrapper, Double>> thenComparing(
+						Comparator<? super Entry<TokenWrapper, Double>> other) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U> Comparator<Entry<TokenWrapper, Double>> thenComparing(
+						Function<? super Entry<TokenWrapper, Double>, ? extends U> keyExtractor,
+						Comparator<? super U> keyComparator) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U extends Comparable<? super U>> Comparator<Entry<TokenWrapper, Double>> thenComparing(
+						Function<? super Entry<TokenWrapper, Double>, ? extends U> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Entry<TokenWrapper, Double>> thenComparingInt(
+						ToIntFunction<? super Entry<TokenWrapper, Double>> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Entry<TokenWrapper, Double>> thenComparingLong(
+						ToLongFunction<? super Entry<TokenWrapper, Double>> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Entry<TokenWrapper, Double>> thenComparingDouble(
+						ToDoubleFunction<? super Entry<TokenWrapper, Double>> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
 				}
 			});
             

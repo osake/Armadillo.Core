@@ -29,7 +29,7 @@ import com.esotericsoftware.reflectasm.FieldAccess;
 
 public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 {
-	private static String m_strDefaultDataPath;
+	public static String m_strDefaultDataPath;
 
 	static
 	{
@@ -42,7 +42,7 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 			Logger.log(ex);
 		}
 	}
-	
+
 	public SqliteCacheFullSchema(
 			Class<T>item) 
 	{
@@ -85,6 +85,22 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 				item,
 				EnumDbType.SqLite);
 	}
+
+	public SqliteCacheFullSchema(
+			String strFileName, 
+			String strTableName,
+			String strDefaultIndex,
+			Class<T> classObj,
+			EnumDbType enumDbType,
+			String strDriver) 
+	{
+		super(strFileName, 
+				strTableName, 
+				strDefaultIndex,
+				classObj,
+				enumDbType,
+				strDriver);
+	}
 	
 	public SqliteCacheFullSchema(
 			String strFileName, 
@@ -97,7 +113,8 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 				strTableName, 
 				strDefaultIndex,
 				classObj,
-				enumDbType);
+				enumDbType,
+				"");
 	}
 
 	@Override
@@ -174,7 +191,8 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
         			strSql,
         			m_strFileName,
         			m_reflector,
-        			m_enumDbType).waitTask();            
+        			m_enumDbType,
+        			m_strDriver).waitTask();            
         }
         catch (Exception ex)
         {
@@ -190,7 +208,8 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 				strSql, 
 				m_reflector, 
 				m_strFileName, 
-				m_enumDbType).waitTask();
+				m_enumDbType,
+				m_strDriver).waitTask();
 	}
 	
 	@Override
@@ -205,15 +224,16 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 				0, 
 				m_strFileName, 
 				m_reflector,
-				m_enumDbType);
+				m_enumDbType,
+				m_strDriver);
 		
 		SqliteTaskQueues.enqueueLoadData(data, sqliteReadJob, null);
 	}
 
 	public void execute(
 			String strSql, 
-			ArrayList<Object[]> data,
-			ArrayList<String> schema) {
+			List<Object[]> data,
+			List<String> schema) {
 		
 		SqliteReadJob sqliteReadJob = new SqliteReadJob(
 				null, 
@@ -221,7 +241,8 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 				0, 
 				m_strFileName, 
 				m_reflector,
-				m_enumDbType);
+				m_enumDbType,
+				m_strDriver);
 		
 	    if(schema != null){
 	    	sqliteReadJob.setLoadColNames(true);
@@ -353,7 +374,8 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 				m_reflector, 
 				m_strFileName, 
 				false,
-				m_enumDbType);
+				m_enumDbType,
+				m_strDriver);
 		
         try
         {
@@ -398,7 +420,8 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 					0, 
 					m_strFileName, 
 					m_reflector,
-					m_enumDbType);
+					m_enumDbType,
+					m_strDriver);
 			
 			return SqliteTaskQueues.executeScalar(
 					sqliteReadJob);
@@ -437,6 +460,7 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 				ISqliteCacheBase cache = SqliteCacheConnectionPool.getDbWrapper(
 						strFileName, 
 						reflector,
+						m_strDriver,
 						enumDbType);
 				readLock = cache.getReadWriteLock().readLock();
 				
@@ -496,7 +520,8 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
     				0, 
     				m_strFileName, 
     				m_reflector,
-    				m_enumDbType);
+    				m_enumDbType,
+    				m_strDriver);
     		int intVal = SqliteTaskQueues.executeScalar(sqliteReadJob);
     		
             return intVal == 1;
@@ -530,7 +555,8 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
     				m_reflector, 
     				m_strFileName,
     				true,
-    				m_enumDbType);
+    				m_enumDbType,
+    				m_strDriver);
 
             //
             // build objects using reflection

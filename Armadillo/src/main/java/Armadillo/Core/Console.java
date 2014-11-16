@@ -20,6 +20,16 @@ public class Console {
 	{
 		WriteLine("");
 	}
+
+	public static void WriteLine(Object obj) 
+	{
+		if(obj == null)
+		{
+			WriteLine("null");
+			return;
+		}
+		WriteLine(obj.toString());
+	}
 	
 	public static void WriteLine(String string) 
 	{

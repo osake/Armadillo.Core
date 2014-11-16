@@ -7,6 +7,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
@@ -275,6 +279,55 @@ public class SqliteTests
 			    public int compare( Foo a, Foo b ){
 			        return a.m_j - b.m_j;
 			    }
+
+				@Override
+				public Comparator<Foo> reversed() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Foo> thenComparing(
+						Comparator<? super Foo> other) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U> Comparator<Foo> thenComparing(
+						Function<? super Foo, ? extends U> keyExtractor,
+						Comparator<? super U> keyComparator) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U extends Comparable<? super U>> Comparator<Foo> thenComparing(
+						Function<? super Foo, ? extends U> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Foo> thenComparingInt(
+						ToIntFunction<? super Foo> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Foo> thenComparingLong(
+						ToLongFunction<? super Foo> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Foo> thenComparingDouble(
+						ToDoubleFunction<? super Foo> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
 			});	     
 			
 			int intListSize = list2.length;
@@ -356,6 +409,55 @@ public class SqliteTests
 			    public int compare( Bar a, Bar b ){
 			        return a.m_j - b.m_j;
 			    }
+
+				@Override
+				public Comparator<Bar> reversed() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Bar> thenComparing(
+						Comparator<? super Bar> other) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U> Comparator<Bar> thenComparing(
+						Function<? super Bar, ? extends U> keyExtractor,
+						Comparator<? super U> keyComparator) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U extends Comparable<? super U>> Comparator<Bar> thenComparing(
+						Function<? super Bar, ? extends U> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Bar> thenComparingInt(
+						ToIntFunction<? super Bar> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Bar> thenComparingLong(
+						ToLongFunction<? super Bar> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Bar> thenComparingDouble(
+						ToDoubleFunction<? super Bar> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
 			});	     
 			
 			int intListSize = list2.length;
@@ -463,6 +565,55 @@ public class SqliteTests
 	            public int compare( Foo a, Foo b ){
 	                return a.m_j - b.m_j;
 	            }
+
+				@Override
+				public Comparator<Foo> reversed() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Foo> thenComparing(
+						Comparator<? super Foo> other) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U> Comparator<Foo> thenComparing(
+						Function<? super Foo, ? extends U> keyExtractor,
+						Comparator<? super U> keyComparator) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public <U extends Comparable<? super U>> Comparator<Foo> thenComparing(
+						Function<? super Foo, ? extends U> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Foo> thenComparingInt(
+						ToIntFunction<? super Foo> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Foo> thenComparingLong(
+						ToLongFunction<? super Foo> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Comparator<Foo> thenComparingDouble(
+						ToDoubleFunction<? super Foo> keyExtractor) {
+					// TODO Auto-generated method stub
+					return null;
+				}
 	        });	        
 	        
 	        ArrayList<String> keysToDelete = new ArrayList<String>();

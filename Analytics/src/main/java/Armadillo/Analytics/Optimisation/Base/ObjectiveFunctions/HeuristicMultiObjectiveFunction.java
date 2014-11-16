@@ -45,6 +45,10 @@ public class HeuristicMultiObjectiveFunction extends AHeuristicObjectiveFunction
 
     public int VariableCount()
     {
+    	if(m_objectiveFunctions.size() == 0)
+    	{
+    		return 0;
+    	}
         return m_objectiveFunctions.get(0).VariableCount();
     }
 

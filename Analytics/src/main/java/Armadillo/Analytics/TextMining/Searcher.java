@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
@@ -156,6 +160,55 @@ public class Searcher
 						{
 							return MstDistanceObj.compareStatic(item1, item2);
 							
+						}
+
+						@Override
+						public Comparator<MstDistanceObj> reversed() {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<MstDistanceObj> thenComparing(
+								Comparator<? super MstDistanceObj> other) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public <U> Comparator<MstDistanceObj> thenComparing(
+								Function<? super MstDistanceObj, ? extends U> keyExtractor,
+								Comparator<? super U> keyComparator) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public <U extends Comparable<? super U>> Comparator<MstDistanceObj> thenComparing(
+								Function<? super MstDistanceObj, ? extends U> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<MstDistanceObj> thenComparingInt(
+								ToIntFunction<? super MstDistanceObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<MstDistanceObj> thenComparingLong(
+								ToLongFunction<? super MstDistanceObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+						@Override
+						public Comparator<MstDistanceObj> thenComparingDouble(
+								ToDoubleFunction<? super MstDistanceObj> keyExtractor) {
+							// TODO Auto-generated method stub
+							return null;
 						}
 			});
 	        
