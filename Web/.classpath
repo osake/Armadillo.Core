@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-  <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
-  <classpathentry kind="src" path="src/test/resources" output="target/test-classes" excluding="**/*.java"/>
   <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
-  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar"/>
@@ -13,7 +10,7 @@
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.11/junit-4.11.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
-  <classpathentry kind="src" path="/Armadillo"/>
+  <classpathentry kind="var" path="M2_REPO/Armadillo/Armadillo/0.0.1-SNAPSHOT/Armadillo-0.0.1-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-configuration/commons-configuration/1.10/commons-configuration-1.10.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
@@ -33,18 +30,18 @@
   <classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.16.1-GA/javassist-3.16.1-GA.jar"/>
   <classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/xerial/sqlite-jdbc/3.7.2/sqlite-jdbc-3.7.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/xerial/sqlite-jdbc/3.8.6/sqlite-jdbc-3.8.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/dyuproject/protostuff/protostuff-parser/1.0.7/protostuff-parser-1.0.7.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/antlr/stringtemplate/3.2/stringtemplate-3.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
-  <classpathentry kind="src" path="/Analytics"/>
-  <classpathentry kind="src" path="/Communication"/>
-  <classpathentry kind="src" path="/Utils"/>
+  <classpathentry kind="var" path="M2_REPO/Armadillo/Analytics/0.0.1-SNAPSHOT/Analytics-0.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/Armadillo/Communication/0.0.1-SNAPSHOT/Communication-0.0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/Armadillo/Utils/0.0.1-SNAPSHOT/Utils-0.0.1-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/jmathplot/jmathplot/1.0/jmathplot-1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/jfree/jfreechart/1.0.9/jfreechart-1.0.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/jfree/jcommon/1.0.12/jcommon-1.0.12.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/primefaces/primefaces/5.1/primefaces-5.1.jar" sourcepath="M2_REPO/org/primefaces/primefaces/5.1/primefaces-5.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/primefaces/primefaces/5.1/primefaces-5.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/javaee-api/7.0/javaee-api-7.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/mail/javax.mail/1.5.0/javax.mail-1.5.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/glassfish/javax.faces/2.2.8-03/javax.faces-2.2.8-03.jar"/>
