@@ -3,4 +3,5 @@
 <LogFile>TestLogFile</LogFile>
 <LogPath>c:\HC.Java\Logs</LogPath>
 <DataPath>c:\HC.Java\Data</DataPath>
+<ResultSize>100</ResultSize>
 </Constants>
