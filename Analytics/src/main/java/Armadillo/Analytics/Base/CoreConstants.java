@@ -4,7 +4,7 @@ import Armadillo.Core.Logger;
 
 public class CoreConstants {
         
-	public static final String COMPANY_NAME = "HC";
+	public static final String COMPANY_NAME = "Armadillo";
 
         public static final String DATA_PATH = "Data";
 
