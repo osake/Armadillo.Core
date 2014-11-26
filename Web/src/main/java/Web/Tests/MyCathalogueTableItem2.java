@@ -12,7 +12,7 @@ import Web.Catalogue.AUiCatalogueTableItem;
 import Web.Catalogue.CatalogueItem;
 import Web.Table.MyTableHelper;
 
-public class MyCathalogueTableItem extends AUiCatalogueTableItem
+public class MyCathalogueTableItem2 extends AUiCatalogueTableItem
 {
 	private static String DB_FILE_NAME;
 	public static SqliteCacheFullSchema<CatalogueItem> m_db;
@@ -22,7 +22,7 @@ public class MyCathalogueTableItem extends AUiCatalogueTableItem
 		try
 		{
 			DB_FILE_NAME = PathHelper.combinePaths(
-					"C:/HC.Java.HC/Data", "Catalogue2.db");
+					"C:/HC.Java.HC/Data", "Catalogue.db");
 			m_db = new SqliteCacheFullSchema<CatalogueItem>(
 					DB_FILE_NAME,
 					CatalogueItem.class);
@@ -66,7 +66,7 @@ public class MyCathalogueTableItem extends AUiCatalogueTableItem
 				{
 					"Test",
 					"Test",
-					"CatalogueTestTable2"
+					"CatalogueTestTable"
 				};
 	}
 	

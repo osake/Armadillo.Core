@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.primefaces.component.chart.Chart;
 import org.primefaces.model.chart.BubbleChartSeries;
 import org.primefaces.model.chart.ChartModel;
-import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartSeries;
 
 import Armadillo.Analytics.TextMining.Searcher;
 import Armadillo.Core.Logger;
@@ -21,7 +21,7 @@ import Web.Dashboard.EnumChartType;
 
 public abstract class AUiChartItem  extends AUiTableItem
 {
-	private Map<String, Serializable> m_chartSeries;
+	private Map<String, Serializable> m_chartSeriesMap;
 	private Map<String, Double> m_lastValueSeries = new ConcurrentHashMap<String, Double>();
 	private ChartModel m_chartModel;
 	private Chart m_lineChart;
@@ -31,20 +31,20 @@ public abstract class AUiChartItem  extends AUiTableItem
 
 	public void setChartSeries(Map<String, Serializable> chartSeries)
 	{
-		m_chartSeries = chartSeries;
+		m_chartSeriesMap = chartSeries;
 	}
 	
 	public Map<String, Serializable> getChartSeries()
 	{
 		try
 		{
-			if(m_chartSeries == null)
+			if(m_chartSeriesMap == null)
 			{
 				synchronized (m_lockObj) 
 				{
-					if(m_chartSeries == null)
+					if(m_chartSeriesMap == null)
 					{
-						m_chartSeries = generateChartSeries();
+						m_chartSeriesMap = generateChartSeries();
 					}
 				}
 			}
@@ -53,7 +53,7 @@ public abstract class AUiChartItem  extends AUiTableItem
 		{
 			Logger.log(ex);
 		}
-		return m_chartSeries;
+		return m_chartSeriesMap;
 	}
 	
 	@Override
@@ -114,21 +114,21 @@ public abstract class AUiChartItem  extends AUiTableItem
 	{
 		try
 		{
-			if(m_chartSeries == null)
+			if(m_chartSeriesMap == null)
 			{
-				m_chartSeries = new ConcurrentHashMap<String, Serializable>();
+				m_chartSeriesMap = new ConcurrentHashMap<String, Serializable>();
 			}
 			
 			BubbleChartSeries chartSeries;
-			if(!m_chartSeries.containsKey(strSeriesName))
+			if(!m_chartSeriesMap.containsKey(strSeriesName))
 			{
 				chartSeries = new BubbleChartSeries(strSeriesName);
 				chartSeries.setLabel(strSeriesName);
-				m_chartSeries.put(strSeriesName, chartSeries);
+				m_chartSeriesMap.put(strSeriesName, chartSeries);
 			}
 			else
 			{
-				chartSeries = (BubbleChartSeries)m_chartSeries.get(strSeriesName);
+				chartSeries = (BubbleChartSeries)m_chartSeriesMap.get(strSeriesName);
 			}
 			chartSeries.setX(intX);
 			chartSeries.setY(intY);
@@ -152,21 +152,21 @@ public abstract class AUiChartItem  extends AUiTableItem
 	{
 		try
 		{
-			if(m_chartSeries == null)
+			if(m_chartSeriesMap == null)
 			{
-				m_chartSeries = new ConcurrentHashMap<String, Serializable>();
+				m_chartSeriesMap = new ConcurrentHashMap<String, Serializable>();
 			}
 			
-			ChartSeries chartSeries;
-			if(!m_chartSeries.containsKey(strSeriesName))
+			LineChartSeries chartSeries;
+			if(!m_chartSeriesMap.containsKey(strSeriesName))
 			{
-				chartSeries = new ChartSeries(strSeriesName);
+				chartSeries = new LineChartSeries(strSeriesName);
 				chartSeries.setLabel(strSeriesName);
-				m_chartSeries.put(strSeriesName, chartSeries);
+				m_chartSeriesMap.put(strSeriesName, chartSeries);
 			}
 			else
 			{
-				chartSeries = (ChartSeries)m_chartSeries.get(strSeriesName);
+				chartSeries = (LineChartSeries)m_chartSeriesMap.get(strSeriesName);
 			}
 			chartSeries.set(strX, dblY);
 			m_lastValueSeries.put(strSeriesName, dblY);
@@ -174,9 +174,9 @@ public abstract class AUiChartItem  extends AUiTableItem
 			//
 			// make sure each series contain the same value
 			//
-			for(Entry<String, Serializable> kvp : m_chartSeries.entrySet())
+			for(Entry<String, Serializable> kvp : m_chartSeriesMap.entrySet())
 			{
-				ChartSeries currChartSeries = (ChartSeries)kvp.getValue();
+				LineChartSeries currChartSeries = (LineChartSeries)kvp.getValue();
 				if(!currChartSeries.getData().containsKey(strX))
 				{
 					double dblLastValue = 0;

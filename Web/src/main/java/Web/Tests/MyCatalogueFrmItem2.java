@@ -4,9 +4,9 @@ import Armadillo.Core.Cache.SqliteCacheFullSchema;
 import  Utils.Gui.Frm.AUiFrmSqLiteItem;
 import Web.Catalogue.CatalogueItem;
 
-public class MyCatalogueFrmItem extends AUiFrmSqLiteItem
+public class MyCatalogueFrmItem2 extends AUiFrmSqLiteItem
 {
-	public MyCatalogueFrmItem() 
+	public MyCatalogueFrmItem2() 
 	{
 		super(CatalogueItem.class);
 	}
@@ -14,7 +14,7 @@ public class MyCatalogueFrmItem extends AUiFrmSqLiteItem
 	@Override
 	protected SqliteCacheFullSchema<?> generateDb() 
 	{
-		return MyCathalogueTableItem2.m_db;
+		return MyCathalogueTableItem.m_db;
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class MyCatalogueFrmItem extends AUiFrmSqLiteItem
 		{
 				"Test",
 				"Test",
-				"CatalogueTestFrm2"
+				"CatalogueTestFrm"
 		};
 	}
 

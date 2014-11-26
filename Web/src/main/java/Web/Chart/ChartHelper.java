@@ -16,7 +16,7 @@ import org.primefaces.model.chart.BubbleChartSeries;
 import org.primefaces.model.chart.ChartModel;
 import org.primefaces.model.chart.LineChartModel;
 //import org.primefaces.model.chart.ChartModel;
-import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartSeries;
 
 import Armadillo.Core.Logger;
 import  Utils.Gui.AUiItem;
@@ -128,7 +128,7 @@ public class ChartHelper {
 				chartModel.clear();
 				for (Serializable chartSeries : chartSeriesMap.values()) 
 				{
-					ChartSeries lineChartSeries = (ChartSeries) chartSeries;
+					LineChartSeries lineChartSeries = (LineChartSeries) chartSeries;
 					chartModel.addSeries(lineChartSeries);
 				}
 			}
