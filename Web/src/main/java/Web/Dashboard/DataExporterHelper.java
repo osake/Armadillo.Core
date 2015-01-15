@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import org.primefaces.model.chart.BubbleChartSeries;
-import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.ChartSeries;
 
 import Armadillo.Core.Logger;
 import Armadillo.Core.Text.StringHelper;
@@ -142,7 +142,7 @@ public class DataExporterHelper
 				{
 					for(Serializable  serializable: chartSeries.values())
 					{
-						LineChartSeries currChartSeries = (LineChartSeries)serializable;
+						ChartSeries currChartSeries = (ChartSeries)serializable;
 						TreeMap<String,String> seriesMap = new TreeMap<String,String>();
 						outMap.put(currChartSeries.getLabel(), seriesMap);
 						for(Entry<Object, Number> kvp : currChartSeries.getData().entrySet())

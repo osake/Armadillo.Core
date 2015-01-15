@@ -75,5 +75,10 @@ public class MyCathalogueTableItem2 extends AUiCatalogueTableItem
 	{
 		return CatalogueItem.class;
 	}
+
+	@Override
+	public int getRowCount() {
+		return m_db.getSize();
+	}
 	
 }

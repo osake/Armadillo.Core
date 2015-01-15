@@ -13,10 +13,11 @@ import org.primefaces.model.chart.AxisType;
 //import org.primefaces.component.chart.line.LineChart;
 import org.primefaces.model.chart.BubbleChartModel;
 import org.primefaces.model.chart.BubbleChartSeries;
+import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartModel;
 import org.primefaces.model.chart.LineChartModel;
 //import org.primefaces.model.chart.ChartModel;
-import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.ChartSeries;
 
 import Armadillo.Core.Logger;
 import  Utils.Gui.AUiItem;
@@ -53,6 +54,7 @@ public class ChartHelper {
 			lineChart.setType("line");
 			lineChart.setModel(cartesianChartModel);
 			uiChartItem.setChartModel(cartesianChartModel);
+			cartesianChartModel.getAxes().put(AxisType.X, new CategoryAxis("x"));
 			Axis xAxis = cartesianChartModel.getAxis(AxisType.X);
 			xAxis.setTickAngle(-50);
 			
@@ -128,7 +130,7 @@ public class ChartHelper {
 				chartModel.clear();
 				for (Serializable chartSeries : chartSeriesMap.values()) 
 				{
-					LineChartSeries lineChartSeries = (LineChartSeries) chartSeries;
+					ChartSeries lineChartSeries = (ChartSeries) chartSeries;
 					chartModel.addSeries(lineChartSeries);
 				}
 			}

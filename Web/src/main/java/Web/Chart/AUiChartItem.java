@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.primefaces.component.chart.Chart;
 import org.primefaces.model.chart.BubbleChartSeries;
 import org.primefaces.model.chart.ChartModel;
-import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.ChartSeries;
 
 import Armadillo.Analytics.TextMining.Searcher;
 import Armadillo.Core.Logger;
@@ -157,16 +157,16 @@ public abstract class AUiChartItem  extends AUiTableItem
 				m_chartSeriesMap = new ConcurrentHashMap<String, Serializable>();
 			}
 			
-			LineChartSeries chartSeries;
+			ChartSeries chartSeries;
 			if(!m_chartSeriesMap.containsKey(strSeriesName))
 			{
-				chartSeries = new LineChartSeries(strSeriesName);
+				chartSeries = new ChartSeries(strSeriesName);
 				chartSeries.setLabel(strSeriesName);
 				m_chartSeriesMap.put(strSeriesName, chartSeries);
 			}
 			else
 			{
-				chartSeries = (LineChartSeries)m_chartSeriesMap.get(strSeriesName);
+				chartSeries = (ChartSeries)m_chartSeriesMap.get(strSeriesName);
 			}
 			chartSeries.set(strX, dblY);
 			m_lastValueSeries.put(strSeriesName, dblY);
@@ -176,7 +176,7 @@ public abstract class AUiChartItem  extends AUiTableItem
 			//
 			for(Entry<String, Serializable> kvp : m_chartSeriesMap.entrySet())
 			{
-				LineChartSeries currChartSeries = (LineChartSeries)kvp.getValue();
+				ChartSeries currChartSeries = (ChartSeries)kvp.getValue();
 				if(!currChartSeries.getData().containsKey(strX))
 				{
 					double dblLastValue = 0;
