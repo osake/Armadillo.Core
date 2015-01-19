@@ -13,6 +13,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import Armadillo.Core.Logger;
 import Web.Base.AWebConstants;
 
 public abstract class ARequestLoggingFilter implements Filter 
@@ -35,25 +36,33 @@ public abstract class ARequestLoggingFilter implements Filter
 			ServletResponse response, 
 			FilterChain chain) throws IOException, ServletException 
 	{
-		HttpServletRequest req = (HttpServletRequest) request;
-		Enumeration<String> params = req.getParameterNames();
-		while(params.hasMoreElements())
+		try
 		{
-			String name = params.nextElement();
-			String value = request.getParameter(name);
-			this.context.log(req.getRemoteAddr() + "::Request Params::{"+name+"="+value+"}");
-		}
+			HttpServletRequest req = (HttpServletRequest) request;
 		
-		Cookie[] cookies = req.getCookies();
-		if(cookies != null)
-		{
-			for(Cookie cookie : cookies)
+			Enumeration<String> params = req.getParameterNames();
+			while(params.hasMoreElements())
 			{
-				this.context.log(req.getRemoteAddr() + "::Cookie::{"+cookie.getName()+","+cookie.getValue()+"}");
+				String name = params.nextElement();
+				String value = request.getParameter(name);
+				this.context.log(req.getRemoteAddr() + "::Request Params::{"+name+"="+value+"}");
 			}
+			
+			Cookie[] cookies = req.getCookies();
+			if(cookies != null)
+			{
+				for(Cookie cookie : cookies)
+				{
+					this.context.log(req.getRemoteAddr() + "::Cookie::{"+cookie.getName()+","+cookie.getValue()+"}");
+				}
+			}
+			// pass the request along the filter chain
+			chain.doFilter(request, response);
 		}
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
+		catch(Exception ex)
+		{
+			Logger.log(ex);
+		}
 	}
 
 	public void destroy() 

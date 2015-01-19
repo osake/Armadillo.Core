@@ -82,6 +82,8 @@ public class MyTableHelper
 			DataTable dataTable = new DataTable();
 			dataTable.setScrollable(true);
 			dataTable.setLiveScroll(true);
+			dataTable.setScrollWidth("90%");
+			dataTable.setScrollHeight("90%");
 			dataTable.setValueExpression("value",
 					WebHelper.createValueExpression("#{" + strBeanName + ".tableRows}",
 							List.class));
@@ -121,7 +123,7 @@ public class MyTableHelper
 			//
 			// NOTE: primefaces v4 causes issues with draggable columns!
 			//
-			//dataTable.setDraggableColumns(true);
+			dataTable.setDraggableColumns(true);
 			
 			List<ColumnModel> columns = ((AUiTableItem)tabInstanceWrapper.getUiItem()).getColumns();
 			for (ColumnModel columnModel : columns) 
@@ -140,6 +142,7 @@ public class MyTableHelper
 	
 				if(colMap != null)
 				{
+			
 					colMap.put(strColId, columnModel);
 					pfColMap.put(strColId, pfColumn);
 				}

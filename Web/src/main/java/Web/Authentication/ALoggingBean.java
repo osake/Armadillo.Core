@@ -22,7 +22,7 @@ public abstract class ALoggingBean
 			Logger.log(ex);
 		}
 	}
-
+	
 	public void getLogOut()
 	{
 		logOut();
