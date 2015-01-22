@@ -18,7 +18,7 @@ public class SimpleUiSocket
 	private static Object m_loadSocketLock = new Object();
 	private static ThreadWorker<ObjectWrapper> m_loadSocketWorker;
 	
-	static
+	public static void Initialize()
 	{
         doLoadSocket0();
         rcvLoop();

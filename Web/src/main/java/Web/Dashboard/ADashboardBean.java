@@ -17,6 +17,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.TreeNode;
 
+import Armadillo.Communication.Impl.SimpleUiSocket;
 import Armadillo.Core.Console;
 import Armadillo.Core.Logger;
 import Armadillo.Core.Text.StringHelper;
@@ -49,6 +50,7 @@ public abstract class ADashboardBean extends AFrontEndBean
 			String strMessage = "Loaded bean [" + getClass().getName() + "]";
 			Console.writeLine(strMessage);
 			Logger.log(strMessage);
+			SimpleUiSocket.Initialize();			
 		} 
 		catch (Exception ex) 
 		{

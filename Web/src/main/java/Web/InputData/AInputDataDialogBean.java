@@ -117,6 +117,7 @@ public abstract class AInputDataDialogBean extends ADynamicFrmBean
 			
 			if(AFrmBean.class.isAssignableFrom(m_bean.getClass()))
 			{
+				String[] treeLabels = m_uiFrmItem.getReportTreeLabels();
 				FrmHelper.showDialog(
 						m_uiFrmItem,
 						"frmDialog",
@@ -124,7 +125,8 @@ public abstract class AInputDataDialogBean extends ADynamicFrmBean
 						"frmBean",
 						"frmWidget",
 						false,
-						true);
+						true,
+						treeLabels[treeLabels.length - 1]);
 				((AFrmBean)m_bean).moveToFirst(null);
 			}
 			else if(ADashboardBean.class.isAssignableFrom(m_bean.getClass()) &&

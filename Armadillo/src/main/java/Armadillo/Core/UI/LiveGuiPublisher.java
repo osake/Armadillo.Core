@@ -5,6 +5,8 @@ import java.util.List;
 
 import Armadillo.Core.Guid;
 import Armadillo.Core.Logger;
+import Armadillo.Core.UI.AGuiCallback;
+
 
 public class LiveGuiPublisher 
 {

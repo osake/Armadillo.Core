@@ -20,6 +20,7 @@ import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
 
 import Armadillo.Core.Logger;
+import Armadillo.Core.Text.StringHelper;
 import Armadillo.Core.UI.LabelClass;
 import  Utils.Gui.ACustomMenuItem;
 import  Utils.Gui.Frm.AUiFrmItem;
@@ -35,7 +36,8 @@ public class FrmHelper
 			String strBeanName,
 			String strWidgetName,
 			boolean blnModal,
-			boolean blnIsInput) 
+			boolean blnIsInput,
+			String strHeader) 
 	{
 		try
 		{
@@ -59,6 +61,10 @@ public class FrmHelper
 			        		strBeanName,
 			    			blnIsInput);
 	        generateMenu(uiFrmItem, dialog, panel, strBeanName);
+	        if(!StringHelper.IsNullOrEmpty(strHeader))
+	        {	        
+	        	dialog.setHeader(strHeader);
+	        }
 	        showFormAsDialog(strWidgetName);	
 		}
 		catch(Exception ex)

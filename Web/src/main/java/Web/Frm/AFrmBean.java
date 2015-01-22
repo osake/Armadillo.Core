@@ -835,6 +835,7 @@ public abstract class AFrmBean extends ADynamicFrmBean
 			}
 			else
 			{
+				String[] labels = uiFrmItem.getReportTreeLabels();
 				FrmHelper.showDialog(
 						m_uiFrmItem,
 						"frmDialog",
@@ -842,7 +843,8 @@ public abstract class AFrmBean extends ADynamicFrmBean
 						"frmBean",
 						"frmWidget",
 						false,
-						true);
+						true,
+						labels[labels.length - 1]);
 				moveToFirst(null);
 			}
 		}

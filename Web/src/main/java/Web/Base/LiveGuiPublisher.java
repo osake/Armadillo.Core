@@ -68,8 +68,9 @@ public class LiveGuiPublisher
 								arg2, 
 								arg3, 
 								arg4, 
-								arg5);								
-						return true;
+								arg5);
+						
+					  return true;
 					}
 					catch(Exception ex)
 					{
@@ -88,7 +89,7 @@ public class LiveGuiPublisher
 				{
 					try
 					{
-						PublishTableRow(
+						publishTableRow(
 								arg0, 
 								arg1,
 								arg2, 
