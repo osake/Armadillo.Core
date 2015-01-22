@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.joda.time.DateTime;
 import org.primefaces.model.chart.ChartSeries;
 
-import Armadillo.Core.DateHelper;
 import Armadillo.Core.Logger;
 import Armadillo.Core.ObjectWrapper;
 import Armadillo.Core.Concurrent.ThreadWorker;

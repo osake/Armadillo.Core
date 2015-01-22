@@ -30,7 +30,6 @@ public class DefaultDistributedController
 			strServerName = Config.getStringStatic(
 					"TopicServerName",
 					SimpleUiSocket.class);
-	        //m_controller = DistController.GetController(strTopicFromConfig);
 	        while(m_reqRespClientConnection == null){
 				m_reqRespClientConnection = ZmqRequestResponseClient.GetConnection(
 						strServerName, 

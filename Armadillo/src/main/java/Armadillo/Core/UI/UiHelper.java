@@ -138,19 +138,6 @@ public class UiHelper
 								}
 							}
 				
-//							@Override
-//							public void onTaskCompleted(Task task) 
-//							{
-//								try
-//								{
-//									AUiWorker aUiWorker = (AUiWorker)task.getItem();
-//									aUiWorker.getBusyNotification().setAsIsNotBusy();
-//								} 
-//								catch (Exception ex) 
-//								{
-//									Logger.log(ex);
-//								}
-//							}			
 						};
 		}
 		catch(Exception ex)
@@ -163,7 +150,6 @@ public class UiHelper
 	{
 		try
 		{
-			//uiWorker.getBusyNotification().setAsIsBusy();
 			Task task = m_queue.add(uiWorker);
 			uiWorker.setTask(task);
 			return task;

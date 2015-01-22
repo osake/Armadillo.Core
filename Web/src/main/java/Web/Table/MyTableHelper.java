@@ -82,8 +82,8 @@ public class MyTableHelper
 			DataTable dataTable = new DataTable();
 			dataTable.setScrollable(true);
 			dataTable.setLiveScroll(true);
-			dataTable.setScrollWidth("90%");
-			dataTable.setScrollHeight("90%");
+			//dataTable.setScrollWidth("90%");
+			//dataTable.setScrollHeight("90%");
 			dataTable.setValueExpression("value",
 					WebHelper.createValueExpression("#{" + strBeanName + ".tableRows}",
 							List.class));
@@ -179,6 +179,7 @@ public class MyTableHelper
 						.createValueExpression(
 								"#{dummyRow." + columnModel.getProperty() + "}",
 								String.class));
+				pfColumn.setFilterMatchMode("contains");
 				//
 				// there is no dynamic setter
 				//

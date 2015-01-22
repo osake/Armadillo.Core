@@ -14,6 +14,7 @@ import Armadillo.Communication.Impl.ReqResp.EnumReqResp;
 import Armadillo.Core.Concurrent.ThreadWorker;
 import Armadillo.Core.SelfDescribing.ASelfDescribingClass;
 import Armadillo.Core.SelfDescribing.SelfDescribingClass;
+import Armadillo.Core.UI.LiveGuiPublisher;
 import Armadillo.Core.UI.PublishUiMessageEvent;
 
 public class DistGuiHelper {
@@ -42,12 +43,8 @@ public class DistGuiHelper {
         String strJobId,
         ASelfDescribingClass jobLog)
     {
-    	if(LiveGuiPublisher.OwnInstance == null){
-    		return;
-    	}
-    	
         String strKey = strWorkerId + strJobId;
-        LiveGuiPublisher.OwnInstance.PublishGui(
+        LiveGuiPublisher.PublishGui(
                 EnumReqResp.Admin.toString(),
                 EnumDistributedGui.CloudControllers.toString(),
                 EnumDistributedGui.JobsDetails + "_" + distController.ControllerId,
@@ -81,10 +78,7 @@ public class DistGuiHelper {
         DistWorker distWorker,
         String strLog)
     {
-    	if(LiveGuiPublisher.OwnInstance == null){
-    		return;
-    	}
-        LiveGuiPublisher.OwnInstance.PublishLog(
+        LiveGuiPublisher.PublishLog(
                 EnumReqResp.Admin.toString(),
                 EnumDistributedGui.CloudWorkers.toString(),
                 EnumDistributedGui.Log + "_" + distWorker.WorkerId,
@@ -248,10 +242,7 @@ public class DistGuiHelper {
     {
         try
         {
-        	if(LiveGuiPublisher.OwnInstance == null){
-        		return;
-        	}
-            LiveGuiPublisher.OwnInstance.PublishLog(
+            LiveGuiPublisher.PublishLog(
                 EnumReqResp.Admin.toString(),
                 EnumDistributedGui.CloudControllers.toString(),
                 EnumDistributedGui.Log.toString() + "_" +

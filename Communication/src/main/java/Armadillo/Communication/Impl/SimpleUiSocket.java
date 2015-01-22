@@ -3,9 +3,7 @@ package Armadillo.Communication.Impl;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-
+import Armadillo.Core.UI.LiveGuiPublisher;
 import Armadillo.Core.Logger;
 import Armadillo.Core.ObjectWrapper;
 import Armadillo.Core.Concurrent.ThreadWorker;
@@ -15,8 +13,6 @@ public class SimpleUiSocket
 	private static InputStream m_is;
 	private static ServerSocket m_serverSocket;
 	private static Socket m_socket;
-	private static List<AStringCallback> m_callbacks;
-	private static Object m_callbacksLock;
 	private static ThreadWorker<ObjectWrapper> m_worker;
 	private static Object m_rcvLock = new Object();
 	private static Object m_loadSocketLock = new Object();
@@ -24,8 +20,6 @@ public class SimpleUiSocket
 	
 	static
 	{
-		m_callbacksLock = new Object();
-		m_callbacks = new ArrayList<AStringCallback>();
         doLoadSocket0();
         rcvLoop();
 	}
@@ -45,20 +39,6 @@ public class SimpleUiSocket
     	}
     }
 
-	public static void addCallback(AStringCallback callBack)
-	{
-		try
-		{
-	        synchronized(m_callbacksLock)
-	        {
-				m_callbacks.add(callBack);
-	        }
-		} 
-		catch (Exception e) 
-		{
-			Logger.log(e);
-		}
-	}
 
     private static void rcvLoop() 
     {
@@ -111,7 +91,6 @@ public class SimpleUiSocket
 			        m_is.read(lenBytes, 0, 4);
 			        int len = (((lenBytes[3] & 0xff) << 24) | ((lenBytes[2] & 0xff) << 16) |
 			                  ((lenBytes[1] & 0xff) << 8) | (lenBytes[0] & 0xff));
-			        //Console.writeLine("Arr len " + len);
 			        
 			        if(len > 1e7)
 			        {
@@ -123,18 +102,7 @@ public class SimpleUiSocket
 			        m_is.read(receivedBytes, 0, len);
 			        String strReceived = new String(receivedBytes, 0, len);
 			        
-			        synchronized(m_callbacksLock)
-			        {
-			        	if(m_callbacks != null &&
-			        	   m_callbacks.size() > 0)
-			        	{
-			        		for(AStringCallback callback : m_callbacks)
-			        		{
-			        			callback.OnStr(strReceived);
-			        			strReceived = null;
-			        		}
-			        	}
-			        }
+			        LiveGuiPublisher.publishStrMessage(strReceived);
 			        strReceived = null;
 			        receivedBytes = null;
 			        lenBytes = null;
@@ -169,6 +137,7 @@ public class SimpleUiSocket
         //socket.close();
         //serverSocket.close();
     }
+
 
 	private static void doLoadSocket0() 
 	{

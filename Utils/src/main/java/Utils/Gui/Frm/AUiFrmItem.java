@@ -228,11 +228,6 @@ public abstract class AUiFrmItem extends AUiItem
 		m_lblClassess = lblClassess;
 	}
 
-//	public int getIndex() 
-//	{
-//		return m_intIndex;
-//	}
-
 	protected void publishObject(FrmItem frmItem) 
 	{
 		try

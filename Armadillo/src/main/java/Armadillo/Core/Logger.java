@@ -9,18 +9,43 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.PatternLayout;
 
+import Armadillo.Core.Concurrent.EfficientProducerConsumerQueue;
 import Armadillo.Core.Io.FileHelper;
 import Armadillo.Core.Io.PathHelper;
 import Armadillo.Core.Text.StringHelper;
+import Armadillo.Core.UI.LiveGuiPublisher;
 
 public class Logger 
 {
 	static org.apache.log4j.Logger m_logger;
+	private static EfficientProducerConsumerQueue<Exception> m_exceptionQueue;
 
 	static 
 	{
 		String strLogFileName = getLogFileName();
 		loadLogger(strLogFileName);
+		
+		m_exceptionQueue = new EfficientProducerConsumerQueue<Exception>(1){
+			@Override
+			public void runTask(Exception exception) 
+			{
+				try
+				{
+					LiveGuiPublisher.PublishGui(
+							"Admin", 
+							"Exceptions", 
+							"Exceptions", 
+							Guid.NewGuid().toString(), 
+							exception.toString());
+				}
+				catch(Exception ex)
+				{
+					exception.printStackTrace();
+					ex.printStackTrace();
+				}
+			}
+			
+		};
 	}
 
 	public static void log(Exception ex) 
@@ -28,6 +53,24 @@ public class Logger
 		ex.printStackTrace();
 		m_logger.info(ex.getMessage() + " - " + 
 				ExceptionUtils.getStackTrace(ex));
+		enqueueException(ex);
+	}
+	
+	private static void enqueueException(Exception ex)
+	{
+		try
+		{
+			if(m_exceptionQueue.getSize() > 500)
+			{
+				return;
+			}
+			m_exceptionQueue.add(ex.toString().hashCode() + "", ex);		
+		}
+		catch(Exception ex2)
+		{
+			ex.printStackTrace();
+			ex2.printStackTrace();
+		}
 	}
 
 	public static void log(String strLog) 
