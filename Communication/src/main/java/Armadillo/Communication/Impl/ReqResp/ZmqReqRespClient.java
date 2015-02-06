@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,9 +20,8 @@ import Armadillo.Core.Concurrent.Parallel;
 import Armadillo.Core.Concurrent.ThreadWorker;
 import Armadillo.Core.Text.StringHelper;
 
-public class ZmqRequestResponseClient extends ARequestResponseClient {
-
-	
+public class ZmqReqRespClient extends ARequestResponseClient 
+{
         public KeyValuePair<ZmqReqRespClientSocketWrapper, SocketInfo> BaseSocket;
         public ConcurrentHashMap<ZmqReqRespClientSocketWrapper, SocketInfo> Sockets;
         public ZmqReqRespClientHeartBeat ZmqReqRespClientHeartBeat;
@@ -32,8 +32,10 @@ public class ZmqRequestResponseClient extends ARequestResponseClient {
         private final Object m_socketLock = new Object();
         private int m_intRequestCounter;
         private Object m_lockCounter = new Object();
+        
+        private Random m_rng = new Random();
 
-        public ZmqRequestResponseClient(
+        public ZmqReqRespClient(
             String strServerName,
             int intPort)
              { 
@@ -182,6 +184,7 @@ public class ZmqRequestResponseClient extends ARequestResponseClient {
                 return SendRequestAndGetResponseViaService(requestDataMessage);
             }
         }
+        
 
         private ZmqReqRespClientSocketWrapper GetSocket()
         {
@@ -214,6 +217,18 @@ public class ZmqRequestResponseClient extends ARequestResponseClient {
                                 }
                                 if (socketWrapper != null)
                                 {
+                                	List<ZmqReqRespClientSocketWrapper> sockets = new ArrayList<ZmqReqRespClientSocketWrapper>();
+                                	
+                                    for (Map.Entry<ZmqReqRespClientSocketWrapper, SocketInfo> kvp : socketsArr)
+                                    {
+                                        ZmqReqRespClientSocketWrapper currSocket = kvp.getKey();
+                                        int intCurrReq = currSocket.NumUsages;
+                                        if(intCurrReq == intMinNumRequests)
+                                        {
+                                        	sockets.add(currSocket);
+                                        }
+                                    }
+                                    Shuffle(sockets);
                                     socketWrapper.NumUsages++;
                                     return socketWrapper;
                                 }
@@ -230,6 +245,23 @@ public class ZmqRequestResponseClient extends ARequestResponseClient {
             return null;
         }
 
+        public <T> void Shuffle(List<T> a)
+        {
+        	try
+        	{
+    	        int N = a.size();
+    	        for (int i = 0; i < N; i++)
+    	        {
+    	            int r = i + (int) (m_rng.nextDouble()*(N - i)); // between i and N-1
+    	            Exch(a, i, r);
+    	        }
+        	}
+        	catch(Exception ex)
+        	{
+        		Logger.log(ex);
+        	}
+        }
+        
         private void LoadConnections(
             String strServerName,
             int intPortId,
@@ -253,6 +285,14 @@ public class ZmqRequestResponseClient extends ARequestResponseClient {
             LoadSendJobQueue();
             m_socketsReady = true;
             ZmqReqRespClientHeartBeat = new ZmqReqRespClientHeartBeat(this);
+        }
+
+        // swaps array elements i and j
+        private <T> void Exch(List<T> a, int i, int j)
+        {
+            T swap = a.get(i);
+            a.set(i, a.get(j));
+            a.set(j, swap);
         }
 
         private void LoadSendJobQueue()

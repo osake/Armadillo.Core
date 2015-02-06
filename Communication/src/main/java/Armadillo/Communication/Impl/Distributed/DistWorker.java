@@ -16,7 +16,7 @@ import Armadillo.Core.Logger;
 import Armadillo.Core.ObjectWrapper;
 import Armadillo.Communication.Impl.SimpleUiSocket;
 import Armadillo.Communication.Impl.ReqResp.ReqRespService;
-import Armadillo.Communication.Impl.ReqResp.ZmqRequestResponseClient;
+import Armadillo.Communication.Impl.ReqResp.ZmqReqRespClient;
 import Armadillo.Communication.Impl.Topic.SubscriberCallbackDel;
 import Armadillo.Communication.Impl.Topic.TopicMessage;
 import Armadillo.Communication.Impl.Topic.TopicSubscriberCache;
@@ -362,7 +362,7 @@ public class DistWorker {
 			final int intReqRespPort = Integer.parseInt(
 					Config.getStringStatic("ReqRespPort",
 							SimpleUiSocket.class));
-			ZmqRequestResponseClient.Connect(strServerName, intReqRespPort, 5);
+			ZmqReqRespClient.Connect(strServerName, intReqRespPort, 5);
 			DistWorker.Connect(Config.getStringStatic(
 					"TopicServerName",
 					SimpleUiSocket.class));

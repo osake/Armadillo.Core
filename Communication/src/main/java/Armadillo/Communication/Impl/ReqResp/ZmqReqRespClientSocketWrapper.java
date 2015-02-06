@@ -31,7 +31,7 @@ import Armadillo.Core.Serialization.Serializer;
 
 public class ZmqReqRespClientSocketWrapper {
 	
-    private final ZmqRequestResponseClient m_zmqRequestResponseClient;
+    private final ZmqReqRespClient m_zmqRequestResponseClient;
     private Ctx m_context;
     private ThreadWorker<ObjectWrapper> m_socketRecvWorker;
     private ZmqReqRespClientAck m_zmqReqRespClientAck;
@@ -58,7 +58,7 @@ public class ZmqReqRespClientSocketWrapper {
 
     public ZmqReqRespClientSocketWrapper(
         SocketInfo socketInfo, 
-        ZmqRequestResponseClient zmqRequestResponseClient)
+        ZmqReqRespClient zmqRequestResponseClient)
     {
         m_zmqRequestResponseClient = zmqRequestResponseClient;
         while (!Startup(socketInfo))

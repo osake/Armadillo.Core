@@ -36,7 +36,7 @@ public class ZmqReqRespClientHeartBeat {
     private final Object m_lockPingStart = new Object();
     private ThreadWorker<ObjectWrapper> m_baseSocketWorker;
     private ThreadWorker<ObjectWrapper> m_pingWorker;
-    private final ZmqRequestResponseClient m_zmqRequestResponseClient;
+    private final ZmqReqRespClient m_zmqRequestResponseClient;
 
     private static final ConcurrentHashMap<String,DateTime> m_whoIsPingMap = 
     		new ConcurrentHashMap<String,DateTime>();
@@ -116,7 +116,7 @@ public class ZmqReqRespClientHeartBeat {
     }
     
     public ZmqReqRespClientHeartBeat(
-        ZmqRequestResponseClient zmqRequestResponseClient)
+        ZmqReqRespClient zmqRequestResponseClient)
     {
         m_zmqRequestResponseClient = zmqRequestResponseClient;
         m_threadWorker = new ThreadWorker<ObjectWrapper>(){
@@ -226,7 +226,7 @@ public class ZmqReqRespClientHeartBeat {
                             }
                             SelfDescribingClass pingObj = new SelfDescribingClass();
                             String strTopic = EnumReqResp.AsyncHeartBeatClientToServerTopic.toString();
-                            pingObj.SetClassName(ZmqRequestResponseClient.class.getName() + "1_" +
+                            pingObj.SetClassName(ZmqReqRespClient.class.getName() + "1_" +
                                                  strTopic);
                             TopicPublisherCache.GetPublisher(
                                 strServerName,

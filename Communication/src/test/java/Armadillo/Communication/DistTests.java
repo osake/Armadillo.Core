@@ -16,7 +16,7 @@ import Armadillo.Communication.Impl.SimpleUiSocket;
 import Armadillo.Communication.Impl.Distributed.DefaultDistributedController;
 import Armadillo.Communication.Impl.Distributed.DistWorker;
 import Armadillo.Communication.Impl.ReqResp.ReqRespServer;
-import Armadillo.Communication.Impl.ReqResp.ZmqRequestResponseClient;
+import Armadillo.Communication.Impl.ReqResp.ZmqReqRespClient;
 import Armadillo.Communication.Impl.Topic.TopicServer;
 import Armadillo.Core.Concurrent.ProducerConsumerQueue;
 
@@ -82,7 +82,7 @@ public class DistTests
 			final int intReqRespPort = Integer.parseInt(Config.getStringStatic(
 					"ReqRespPort",
 					SimpleUiSocket.class));
-			ZmqRequestResponseClient.Connect(
+			ZmqReqRespClient.Connect(
 					Config.getStringStatic(
 							"TopicServerName",
 							SimpleUiSocket.class), 

@@ -79,7 +79,7 @@ public abstract class ARequestResponseClient {
                     return;
                 }
                 ARequestResponseClient ownInstance;
-                ownInstance = new ZmqRequestResponseClient(strServerName, intPort);
+                ownInstance = new ZmqReqRespClient(strServerName, intPort);
                 ownInstance.DoConnect(strServerName, intPort, intConnections);
                 m_ownInstances.put(strInstanceName, ownInstance);
                 LoggerPublisher.ConnectPublisher(strServerName);

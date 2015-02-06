@@ -9,7 +9,7 @@ import Armadillo.Core.Logger;
 import Armadillo.Communication.Impl.SimpleUiSocket;
 import Armadillo.Communication.Impl.ReqResp.ARequestResponseClient;
 import Armadillo.Communication.Impl.ReqResp.RequestDataMessage;
-import Armadillo.Communication.Impl.ReqResp.ZmqRequestResponseClient;
+import Armadillo.Communication.Impl.ReqResp.ZmqReqRespClient;
 import Armadillo.Core.SelfDescribing.ASelfDescribingClass;
 import Armadillo.Core.SelfDescribing.SelfDescribingClass;
 
@@ -31,7 +31,7 @@ public class DefaultDistributedController
 					"TopicServerName",
 					SimpleUiSocket.class);
 	        while(m_reqRespClientConnection == null){
-				m_reqRespClientConnection = ZmqRequestResponseClient.GetConnection(
+				m_reqRespClientConnection = ZmqReqRespClient.GetConnection(
 						strServerName, 
 						intReqRespPort);
 				if(m_reqRespClientConnection == null){

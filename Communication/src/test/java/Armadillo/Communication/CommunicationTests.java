@@ -20,7 +20,7 @@ import Armadillo.Communication.Impl.ReqResp.ARequestResponseClient;
 import Armadillo.Communication.Impl.ReqResp.ReqRespServer;
 import Armadillo.Communication.Impl.ReqResp.ReqRespService;
 import Armadillo.Communication.Impl.ReqResp.RequestDataMessage;
-import Armadillo.Communication.Impl.ReqResp.ZmqRequestResponseClient;
+import Armadillo.Communication.Impl.ReqResp.ZmqReqRespClient;
 import Armadillo.Communication.Impl.Topic.SubscriberCallbackDel;
 import Armadillo.Communication.Impl.Topic.TopicMessage;
 import Armadillo.Communication.Impl.Topic.TopicPublisherCache;
@@ -81,7 +81,7 @@ public class CommunicationTests
 				SimpleUiSocket.class));
 		ReqRespServer.StartService(m_strServerName, intReqRespPort, 5);
 		ReqRespService.Connect();
-		ZmqRequestResponseClient.Connect(
+		ZmqReqRespClient.Connect(
 				Config.getStringStatic(
 						"TopicServerName",
 						SimpleUiSocket.class), 
@@ -127,7 +127,7 @@ public class CommunicationTests
 				SimpleUiSocket.class));
 		ReqRespServer.StartService(strServerName, intReqRespPort, 5);
 		ReqRespService.Connect();
-		ZmqRequestResponseClient.Connect(strServerName, intReqRespPort, 5);
+		ZmqReqRespClient.Connect(strServerName, intReqRespPort, 5);
 	}
 
 	public void testReqRespClient() 
@@ -139,7 +139,7 @@ public class CommunicationTests
 							"ReqRespPort",
 							SimpleUiSocket.class));
 			
-			ZmqRequestResponseClient.Connect(
+			ZmqReqRespClient.Connect(
 					"localhost", 
 					intReqRespPort, 5);
 			final int intTimeOutSeconds = Integer.MAX_VALUE;
@@ -161,7 +161,7 @@ public class CommunicationTests
 					Console.writeLine(strMessage);
 					Logger.log(strMessage);
 					
-					ARequestResponseClient connection = ZmqRequestResponseClient.GetConnection("localhost", intReqRespPort);
+					ARequestResponseClient connection = ZmqReqRespClient.GetConnection("localhost", intReqRespPort);
 					@SuppressWarnings("unchecked")
 					ArrayList<Foo> response = 
 							(ArrayList<Foo>)connection.SendRequestAndGetResponse(

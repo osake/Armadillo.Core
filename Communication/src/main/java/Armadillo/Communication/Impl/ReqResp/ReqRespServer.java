@@ -62,7 +62,7 @@ public abstract class ReqRespServer {
 					SimpleUiSocket.class);
 			ReqRespServer.StartService(strServerName, intReqRespPort, 5);
 			ReqRespService.Connect();
-			ZmqRequestResponseClient.Connect(strServerName, intReqRespPort, 5);
+			ZmqReqRespClient.Connect(strServerName, intReqRespPort, 5);
 		}
 		catch(Exception ex)
 		{
