@@ -2,7 +2,9 @@ package Armadillo.Core;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -10,6 +12,7 @@ import org.apache.commons.configuration.XMLConfiguration;
 
 import Armadillo.Core.Io.FileHelper;
 import Armadillo.Core.Io.PathHelper;
+import Armadillo.Core.Text.StringHelper;
 
 public class Config 
 {
@@ -46,6 +49,36 @@ public class Config
 	{
 		Class<?> callingClass = Config.class;
 		return getStringStatic(strKey, callingClass);
+	}
+
+	public static List<String> getStringListStatic(
+			String strKey,
+			Class<?> callingClass) 
+	{
+		try
+		{
+			List<String> list = new ArrayList<String>();
+			String strLine = getStringStatic(strKey, callingClass);
+			if(StringHelper.IsNullOrEmpty(strLine))
+			{
+				return list;
+			}
+			String[] items = strLine.split(Environment.NewLine);
+			for(String strTok : items)
+			{
+				strTok = strTok.trim();
+				if(!StringHelper.IsNullOrEmpty(strTok))
+				{
+					list.add(strTok);
+				}
+			}
+			return list;
+		}
+		catch(Exception ex)
+		{
+			Logger.log(ex);
+		}
+		return new ArrayList<String>();
 	}
 	
 	public static String getStringStatic(

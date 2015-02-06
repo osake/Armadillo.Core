@@ -145,10 +145,12 @@ public class LiveGuiPublisher
 			Set<Class<? extends AUiItem>> reports = ClassHelper
 					.getSubTypes(AUiItem.class);
 
-			for (Class<? extends AUiItem> reportClass : reports) {
+			for (Class<? extends AUiItem> reportClass : reports) 
+			{
 				if (reportClass.isInterface()
 						|| Modifier.isAbstract(reportClass.getModifiers())
-						|| reportClass.getName().contains("$")) {
+						|| reportClass.getName().contains("$")) 
+				{
 					continue;
 				}
 				if (!AUiParam.class.isAssignableFrom(reportClass)
