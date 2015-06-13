@@ -74,11 +74,14 @@ public class ZmqTopicSubscriberHelper {
 				                		intCounter = topicCounter.get(strTopicName);
 				                	}
 				                }
+				                
+			                	m_topicNameToLastUpdate.put(
+			                			GetCounterKey(strTopicName, 
+			                							kvp.getValue().GetConnectionName()),
+			                			DateTime.now());
+			                	
 				                synchronized (m_counterLock)
 				                {
-				                	m_topicNameToLastUpdate.put(
-				                			strTopicName,
-				                			DateTime.now());
 				                    intCounter++;
 					                m_intJobsDone++;
 					                m_intJobsInProgress--;
@@ -269,5 +272,9 @@ public class ZmqTopicSubscriberHelper {
         m_topicConsumerQueue.add(new KeyValuePair<SubscriberCallbackDel, TopicMessage>(
                                              SubscriberCallback, topicMessage));
     }
+
+	public static String GetCounterKey(String strTopic, String strConnectionName) {
+		return strTopic + strConnectionName;
+	}
 	
 }

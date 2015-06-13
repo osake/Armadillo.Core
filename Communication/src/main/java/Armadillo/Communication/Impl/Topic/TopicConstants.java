@@ -7,4 +7,5 @@ public class TopicConstants
     public static final int SUBSCRIBER_DEFAULT_PORT = 8989;
     public static final int SUBSCRIBER_HEART_BEAT_PORT = 8990;
     //public static final TimeSpan TIME_OUT = new TimeSpan(0, 0, 5, 0);
+	public static final int NUM_TOPIC_CONNECTIONS = 5;
 }

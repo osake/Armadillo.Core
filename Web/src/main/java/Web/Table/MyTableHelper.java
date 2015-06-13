@@ -123,7 +123,7 @@ public class MyTableHelper
 			//
 			// NOTE: primefaces v4 causes issues with draggable columns!
 			//
-			dataTable.setDraggableColumns(true);
+			//dataTable.setDraggableColumns(true);
 			
 			List<ColumnModel> columns = ((AUiTableItem)tabInstanceWrapper.getUiItem()).getColumns();
 			for (ColumnModel columnModel : columns) 

@@ -148,6 +148,10 @@ public abstract class ADashboardBean extends AFrontEndBean
 			synchronized(m_nodeSelectLock)
 			{
 				TreeNode treeNode = event.getTreeNode();
+				if(treeNode == null)
+				{
+					return;
+				}
 				if (treeNode.getChildren() == null
 					|| treeNode.getChildren().size() == 0) 
 				{

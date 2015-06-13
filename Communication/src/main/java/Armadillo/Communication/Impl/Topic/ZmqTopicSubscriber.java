@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.math3.util.Precision;
 import org.joda.time.DateTime;
@@ -52,6 +53,10 @@ public class ZmqTopicSubscriber implements ITopicSubscriber {
     		 new ArrayList<SubscriberCallbackDel>();
      private static Object m_subscriberLock = new Object();
      final int intWaitTimeOut = 5000;
+	private boolean m_blnSubscribing;
+    
+	private static final ConcurrentMap<String, Integer> m_topicNameToWaitCounter = 
+            new ConcurrentHashMap<String, Integer>();
 
      public ZmqTopicSubscriber()
      {
@@ -506,7 +511,7 @@ public class ZmqTopicSubscriber implements ITopicSubscriber {
                  {
                      ZmqTopicSubscriberHelper zeroMqTopicSubscriberHelper = subscribers.get(i);
                      topicMessage.SetConnectionName(
-                         m_strServerName + ":" + m_intPort);
+                         GetConnectionName());
                      zeroMqTopicSubscriberHelper.InvokeCallback(topicMessage);
                  }
              }
@@ -579,46 +584,95 @@ public class ZmqTopicSubscriber implements ITopicSubscriber {
 
      private void Resubscribe(boolean blnNotify)
      {
-         if (m_subscribers != null)
-         {
-             synchronized (m_subscribeLock)
-             {
-                 if (m_subscribers != null)
-                 {
-                	 Enumeration<String> enumerator = m_subscribers.keys();
-                     while (enumerator.hasMoreElements())
-                     {
-                    	 String strTopic = enumerator.nextElement();
-                    	 
-                    	 if(!ZmqTopicSubscriberHelper.m_topicNameToLastUpdate.containsKey(
-                    			 strTopic) ||
-                    	     Seconds.secondsBetween(
-                    	    		 ZmqTopicSubscriberHelper
-                    	    		 	.m_topicNameToLastUpdate.get(
-                                			 strTopic),
-                                			 DateTime.now()).getSeconds() > 60)
-                    	 {
-	                         SubscribeSocket(strTopic);
-	                         if (blnNotify)
+    	 try
+    	 {
+	         if (m_subscribers != null)
+	         {
+	             if(m_blnSubscribing)
+	             {
+	                 return;
+	             }
+	             
+	             synchronized (m_subscribeLock)
+	             {
+	                 if(m_blnSubscribing)
+	                 {
+	                     return;
+	                 }
+	                 if (m_subscribers != null)
+	                 {
+	                	 int intCounter = 0;
+	                	 Enumeration<String> enumerator = m_subscribers.keys();
+	                     while (enumerator.hasMoreElements())
+	                     {
+	                    	 m_blnSubscribing = true;
+	                    	 String strTopic = enumerator.nextElement();
+	                    	 
+	                    	 
+	                         String strCounterKey = ZmqTopicSubscriberHelper.GetCounterKey(
+	                                 strTopic,
+	                                 GetConnectionName());
+	
+	                         int intTimeCounter = 0;
+	                         if(m_topicNameToWaitCounter.containsKey(
+	                             strCounterKey))
 	                         {
-	                             ArrayList<NotifierDel> notifierDelList =
-	                            		 m_subscriberNotifier.get(strTopic);
-	                             if (notifierDelList != null)
-	                             {
-	                                 for (int i = 0; i < notifierDelList.size(); i++)
-	                                 {
-	                                     notifierDelList.get(i).invoke(strTopic);
-	                                 }
-	                             }
+	                        	 intTimeCounter = m_topicNameToWaitCounter.get(
+	                                     strCounterKey);
 	                         }
-                    	 }
-                     }
-                 }
-             }
-         }
+	                             
+	                    	 
+	                    	 
+	                    	 if(!ZmqTopicSubscriberHelper.m_topicNameToLastUpdate.containsKey(
+	                    			 strTopic) ||
+	                    	     Seconds.secondsBetween(
+	                    	    		 ZmqTopicSubscriberHelper
+	                    	    		 	.m_topicNameToLastUpdate.get(
+	                                			 strTopic),
+	                                			 DateTime.now()).getSeconds() > 
+	                    	 						Math.min(60*60, 120 * (intTimeCounter + 1))) // slow down logic
+	                    	 {
+	                    		 intCounter++;
+	                    		 m_topicNameToWaitCounter.put(strCounterKey, intTimeCounter + 1);
+	                    		 
+		                         SubscribeSocket(strTopic);
+		                         if (blnNotify)
+		                         {
+		                             ArrayList<NotifierDel> notifierDelList =
+		                            		 m_subscriberNotifier.get(strTopic);
+		                             if (notifierDelList != null)
+		                             {
+		                                 for (int i = 0; i < notifierDelList.size(); i++)
+		                                 {
+		                                     notifierDelList.get(i).invoke(strTopic);
+		                                 }
+		                             }
+		                         }
+		                         ZmqTopicSubscriberHelper.m_topicNameToLastUpdate.put(strCounterKey, DateTime.now());	                         
+	                    	 }
+	                     }
+	                     if(intCounter > 0)
+	                     {
+	                         Console.WriteLine("Warning. Resubscribed to [" + intCounter + "] topics");
+	                     }
+	                 }
+	            	 m_blnSubscribing = false;
+	             }
+	         }
+    	 }
+    	 catch(Exception ex)
+    	 {
+    		 Logger.log(ex);
+    	 }
      }
 
-     public void NotifyDesconnect(
+     private String GetConnectionName() 
+     {
+		
+		return m_strServerName + ":" + m_intPort;
+	}
+
+	public void NotifyDesconnect(
          String strTopic,
          NotifierDel notifierDel)
      {

@@ -33,5 +33,6 @@ public class TextMiningConstants {
     /// define the number each record will search for a match 
     /// </summary>
     public static final int INT_MERGER_SEARCH_LENGTH = 1000;
+	public static final int PURGER_SEARCH_LENGTH = 1000;
 
 }

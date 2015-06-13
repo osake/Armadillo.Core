@@ -16,6 +16,8 @@ public class MstDistanceObj implements Comparable<MstDistanceObj>,
     public int Y;
     public double Score;
 
+    public MstDistanceObj(){}
+    
     public MstDistanceObj(
         int x,
         int y,

@@ -3,11 +3,15 @@ package Armadillo.Core.Serialization;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+
+import Armadillo.Core.Console;
 import Armadillo.Core.Logger;
+
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.Schema;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,8 +92,19 @@ public class Serializer {
 			Schema schema = RuntimeSchema.getSchema(obj.getClass());
 			linkedBuffer = getApplicationBuffer();
 			ProtostuffIOUtil.writeTo(stream, obj, schema, linkedBuffer);
+			stream.close();
 			File file = new File(strFileName);
-			file.renameTo(new File(strFileName0));
+			
+			File oriFile = new File(strFileName0);
+			if(oriFile.exists())
+			{
+				oriFile.delete();
+			}
+			
+			if(!file.renameTo(oriFile))
+			{
+				Console.WriteLine("Could not rename to " + strFileName0);
+			}
 		} 
 		catch (Exception e) 
 		{

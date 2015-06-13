@@ -185,8 +185,8 @@ public class TagLinkCheap implements IStringMetric
     }
 
     public double GetStringMetric(
-        int columnIndex,
-        int totalColumns,
+        int intColumnIndex,
+        int intTotalColumns,
         TokenWrapper[][] tTokens,
         TokenWrapper[][] uTokens,
         double[][] tIdfArray,
@@ -194,11 +194,12 @@ public class TagLinkCheap implements IStringMetric
     {
     	try
     	{
-	        double stringMetric = 0.0;
-	        for (int column = columnIndex; column < totalColumns; column++)
+	        double dblStringMetric = 0.0;
+	        double dblNormalizer = 0;
+	        for (int column = intColumnIndex; column < intTotalColumns; column++)
 	        {
-	            int highLimit = Math.min(tTokens[column].length, m_intLimit);
-	            for (int i = 0; i < highLimit; i++)
+	            int intHighLimit = Math.min(tTokens[column].length, m_intLimit);
+	            for (int i = 0; i < intHighLimit; i++)
 	            {
 	                TokenWrapper actualTToken = tTokens[column][i];
 	                double dblMaxTokenStringMetric = 0.0;
@@ -240,17 +241,20 @@ public class TagLinkCheap implements IStringMetric
 	                        }
 	                    }
 	                }
+	                
+	                dblNormalizer += tIdfArray[column][i] * tIdfArray[column][i];
 	                if (intMaxIndex >= 0)
 	                {
-	                    double tfidfWeight =
+	                    double dblTfidfWeight =
 	                        Math.max(tIdfArray[column][i],
 	                                 uIdfArray[column][intMaxIndex]);
-	                    stringMetric +=
-	                        dblMaxTokenStringMetric*tfidfWeight*tfidfWeight;
+	                    dblStringMetric +=
+	                        dblMaxTokenStringMetric*dblTfidfWeight*dblTfidfWeight;
 	                }
 	            }
 	        }
-	        return stringMetric;
+	        dblStringMetric = Math.min(1.0, dblStringMetric / dblNormalizer); 
+	        return dblStringMetric;
     	}
     	catch(Exception ex)
     	{

@@ -175,7 +175,11 @@ public abstract class AUiItem implements IUiItem
 				{
 					if(m_keys == null)
 					{
-						m_keys = generateKeys();
+						List<String> keys = generateKeys();
+						//
+						// make sure the keys do not contain invalid characters
+						//
+						cleanKeys(keys);
 						getSearcher();
 					}
 				}
@@ -186,6 +190,13 @@ public abstract class AUiItem implements IUiItem
 			Logger.log(ex);
 		}
 		return m_keys;
+	}
+	private void cleanKeys(List<String> keys) {
+		m_keys = new ArrayList<String>();
+		for(String strKey : keys)
+		{
+			m_keys.add(strKey.replaceAll("'", ""));
+		}
 	}
 	
 	public void setParamsMap(Map<String, String> paramsMap) 

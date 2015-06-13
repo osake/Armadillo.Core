@@ -689,7 +689,7 @@ public class WebHelper
 					"blur");
 			
 			uiInput.setValueExpression(
-					"onclick",
+					"ondblclick",
 					createValueExpression(
 							"this.select()",
 							String.class));

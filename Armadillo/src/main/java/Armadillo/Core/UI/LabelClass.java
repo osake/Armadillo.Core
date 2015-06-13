@@ -131,9 +131,12 @@ public class LabelClass
 	public boolean isAValidType() 
 	{
 		return m_dataType == double.class ||
+				m_dataType == Double.class ||
 				m_dataType == String.class ||
 				m_dataType == int.class ||
+				m_dataType == Integer.class ||
 				m_dataType == boolean.class ||
+				m_dataType == Boolean.class ||
 				m_dataType == long.class ||
 				m_dataType == float.class ||
 				m_dataType == Date.class ||

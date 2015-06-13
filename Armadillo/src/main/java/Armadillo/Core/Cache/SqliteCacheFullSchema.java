@@ -17,6 +17,7 @@ import java.util.zip.GZIPInputStream;
 import org.joda.time.DateTime;
 
 import Armadillo.Core.Config;
+import Armadillo.Core.HCException;
 import Armadillo.Core.Logger;
 import Armadillo.Core.ObjectWrapper;
 import Armadillo.Core.Io.PathHelper;
@@ -512,7 +513,9 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 
             String strQuery = "SELECT EXISTS(select " + m_strDefaultIndex +
                             " from [" + m_strTableName +
-                           "] where " + m_strDefaultIndex + " = '" + strKey + "' LIMIT 1)";
+                           "] where " + m_strDefaultIndex + " = '" + 
+                            strKey.replace("'", "") + 
+                            "' LIMIT 1)";
 
     		sqliteReadJob = new SqliteReadJob(
     				null, 
@@ -641,4 +644,71 @@ public class SqliteCacheFullSchema<T> extends ASqliteCache<T>
 	{
 		return m_strDefaultIndex;
 	}
+
+	public List<String> containsKeys(List<String> strKeys) 
+	{
+        try
+        {
+            if (strKeys == null || strKeys.size() == 0)
+            {
+                return new ArrayList<String>();
+            }
+
+            if (StringHelper.IsNullOrEmpty(m_strDefaultIndex))
+            {
+                throw new HCException("Key not found");
+            }
+            
+
+            String strQuery = "SELECT distinct " + m_strDefaultIndex +
+                            " FROM [" + m_strTableName +
+                           "] WHERE " + m_strDefaultIndex + " IN (" +
+                           GetInStatement(strKeys) + ")";
+
+    		ArrayList<Object[]> data = new ArrayList<Object[]>();
+    		execute(strQuery, data);
+
+            List<String> keysResult = new ArrayList<String>();
+            for (Object[] objectse : data)
+            {
+                if (objectse[0] != null)
+                {
+                    keysResult.add((String) objectse[0]);
+                }
+            }
+            return keysResult;
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(new HCException("Exception in database [" +
+                m_strFileName +
+                "]"));
+            Logger.Log(ex);
+        }
+        return new ArrayList<String>();
+	}
+	
+    private String GetInStatement(List<String> list)
+    {
+        try
+        {
+        	StringBuilder sb = new StringBuilder();
+            boolean blnIsTitle = true;
+            for (String str : list)
+            {
+                if (!blnIsTitle)
+                {
+                    sb.append(",");
+                }
+                blnIsTitle = false;
+                sb.append("'" + str.replace("'", "") + "'");
+            }
+            return sb.toString();
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(ex);
+        }
+        return "";
+    }	
 }

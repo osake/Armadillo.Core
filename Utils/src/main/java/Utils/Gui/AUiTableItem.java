@@ -351,6 +351,10 @@ public abstract class AUiTableItem extends AUiItem
 					//
 					TableRow tableRow = UiHelper.generateTableRow(m_reflector, obj, strKey);
 					m_tableRows.add(tableRow);
+					if(strKey == null || tableRow == null)
+					{
+						return;
+					}
 					m_rowsMap.put(strKey, tableRow);
 				}
 			}

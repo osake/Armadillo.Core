@@ -30,6 +30,8 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
+import Armadillo.Analytics.TextMining.MstDistanceObj;
+import Armadillo.Analytics.TextMining.Searcher;
 import Armadillo.Core.Console;
 import Armadillo.Core.Logger;
 import Armadillo.Core.ParserHelper;
@@ -907,6 +909,29 @@ public abstract class AFrmBean extends ADynamicFrmBean
 				m_uiFrmItem.moveToIndex(intIndex);
 				publishToUiItems();
 				doLog();
+			}
+			else if(!StringHelper.IsNullOrEmpty(strItem))
+			{
+				Searcher m_searcher = m_uiFrmItem.getSearcher();
+				
+				if(m_searcher == null)
+				{
+					return; 
+				}
+				
+				List<MstDistanceObj> results = m_searcher.Search(strItem);
+				if(results != null && results.size() > 0)
+				{
+					MstDistanceObj mstDistanceObj = results.get(0);
+					int intPosition = mstDistanceObj.Y;
+					if(intPosition >= 0 && intPosition < keys.size())
+					{
+						m_uiFrmItem.setIndex(intPosition);
+						m_uiFrmItem.moveToIndex(intPosition);
+						publishToUiItems();
+						doLog();
+					}
+				}
 			}
 		}
 		catch(Exception ex)

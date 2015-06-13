@@ -1,5 +1,8 @@
 package Armadillo.Analytics.Stat.Distributions;
 
+import org.junit.Test;
+
+import Armadillo.Core.Console;
 import Armadillo.Core.HCException;
 import Armadillo.Analytics.SpecialFunctions.IncompleteGamaFunct;
 
@@ -119,6 +122,14 @@ public class ChiSquareDist
         HCException.doAssert(((double)(y)>=(double)(0) && (double)(y)<=(double)(1)) && (double)(v)>=(double)(1), "Domain error in InvChiSquareDistribution");
         result = 2*IncompleteGamaFunct.IncompleteGammaComplement(0.5*v, y);
         return result;
+    }
+    
+    @Test
+    public void TestChi()
+    {
+    	// TODO, this is wrong!!
+    	double dblChi = invchisquaredistribution(5, 0.95);
+    	Console.WriteLine(dblChi);
     }
 
 

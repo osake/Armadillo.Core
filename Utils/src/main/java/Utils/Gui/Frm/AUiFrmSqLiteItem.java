@@ -215,14 +215,16 @@ public abstract class AUiFrmSqLiteItem extends AUiFrmItem
 			}
 			
 			Object itemsObj = db.loadDataFromKey(strKey);
-			if(itemsObj == null)
+			if(itemsObj == null || Array.getLength(itemsObj) == 0)
 			{
-				return null;
+				// HACK in order to load keys with apostrophe's
+				itemsObj = db.loadDataFromKey(strKey.replace("'", "''"));
+				if(itemsObj == null || Array.getLength(itemsObj) == 0)
+				{
+					return null;
+				}
 			}
-			if(Array.getLength(itemsObj) == 0)
-			{
-				return null;
-			}
+			
 			Object rawItem = Array.get(itemsObj, 0);
 			return rawItem;
 		}
@@ -531,5 +533,11 @@ public abstract class AUiFrmSqLiteItem extends AUiFrmItem
 		}
 		
 		return new ArrayList<String>();
+	}
+	
+	@Override
+	public void onClose() 
+	{
+		m_keys = null;
 	}
 }
